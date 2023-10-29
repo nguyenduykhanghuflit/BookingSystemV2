@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "password",
+    "database": "HotelBooking",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}

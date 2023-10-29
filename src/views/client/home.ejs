@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Hiroto Template" />
+    <meta name="keywords" content="Hiroto, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>HotelBooking</title>
+
+    <!-- icon web -->
+    <link rel="icon" href="/client/img/iconlogo.png" />
+
+    <!--boxi icon -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- fontawesome -->
+    <link
+      rel="stylesheet"
+      href="/client/css/font-awesome.min.css"
+      type="text/css"
+    />
+
+    <!-- Css Styles -->
+    <link
+      rel="stylesheet"
+      href="/client/css/header-bootstrap.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="/client/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/client/css/header.css" type="text/css" />
+    <!-- toast -->
+    <link rel="stylesheet" href="/client/css/toastr.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="loading">
+      <div class="loader"></div>
+    </div>
+
+    <div id="header">
+      <div class="header-nav">
+        <div class="header-logo">
+          <img src="/client/img/mylogo.svg" alt="" class="logo" />
+        </div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="/" class="nav-link-nb nav-link-nb-main">Trang chủ</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/rooms" class="nav-link-nb">Phòng</a>
+          </li>
+          <li class="nav-item">
+            <a href="/hotel" class="nav-link-nb">Thông tin</a>
+          </li>
+          <li class="nav-item">
+            <a href="/location" class="nav-link-nb">Vị trí</a>
+          </li>
+        </ul>
+      </div>
+      <div class="header-account">
+        <a class="btn-login btn-account" href="/login"
+          ><i class="bx bx-user"></i>Đăng nhập
+        </a>
+        <a class="btn-register btn-account" href="/register">Đăng ký </a>
+      </div>
+    </div>
+    <div id="booking" class="section">
+      <div class="section-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="booking-form">
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input
+                          id="date-checkin"
+                          class="form-control"
+                          type="date"
+                          value=""
+                          required
+                        />
+                        <span class="form-label">Ngày nhận phòng</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input
+                          id="date-checkout"
+                          class="form-control"
+                          type="date"
+                          required
+                        />
+                        <span class="form-label">Ngày trả phòng</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- số phòng -->
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <span class="form-label">Số phòng</span>
+                        <select id="number-room" required class="form-control">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                      </div>
+                    </div>
+                    <!-- số người lớn -->
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <span class="form-label">Số người lớn</span>
+                        <select id="number-adult" required class="form-control">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>4</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                      </div>
+                    </div>
+                    <!-- số trẻ em -->
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <span class="form-label">Số trẻ em</span>
+                        <select
+                          id="number-children"
+                          required
+                          class="form-control"
+                        >
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-btn">
+                    <button type="button" id="btnSearch" class="submit-btn">
+                      Tìm phòng ngay
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+              <div class="booking-cta">
+                <h2>Welcome to huflit</h2>
+                <p>
+                  Chúng tôi sẽ giúp bạn tìm phòng nhanh chóng và dễ dàng nhất
+                  chỉ với vài thao tác đơn giản. Chúc bạn có một trải nghiệm
+                  tuyệt vời tại HUFLIT
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section Begin -->
+
+    <section class="services spad">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-title">
+              <h5>Dịch vụ</h5>
+              <h2>Dịch vụ nổi bật</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="services__item">
+              <img src="/client/img/services-1.png" alt="" />
+              <h4>Wi-fi miễn phí</h4>
+              <p>
+                Wifi miễn phí với tốc độ cao được trang bị hầu hết ở các phòng
+                để phục vụ quý khách 1 cách tốt nhất
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="services__item">
+              <img src="/client/img/services-2.png" alt="" />
+              <h4>Hồ bơi cao cấp</h4>
+              <p>
+                Hồ bơi cao cấp được mở quanh năm, view đẹp, trang bị khăn trên
+                hồ bơi, ghế dài tắm nắng
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="services__item">
+              <img src="/client/img/services-3.png" alt="" />
+              <h4>Quán Cafe Đẹp</h4>
+              <p>
+                Quán cafe ở Huflit mang lại một cảm giác thoải mái với view biển
+                đẹp, chất lượng dịch vụ tốt, giá thành hợp lý
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="services__item">
+              <img src="/client/img/services-4.png" alt="" />
+              <h4>Quầy bar</h4>
+              <p>
+                Quán bar thể thao, bàn ghế được bố trí đơn giản và trang bị
+                nhiều màn hình tivi to để truyền hình trực tiếp các trận thi đấu
+                thể thao nổi tiếng
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="services__item">
+              <img src="/client/img/services-5.png" alt="" />
+              <h4>TV HD</h4>
+              <p>
+                Tivi to mang lại cho quý khách trải nghiệm hình ảnh một cách
+                tuyệt vời nhất
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="services__item">
+              <img src="/client/img/services-6.png" alt="" />
+              <h4>Nhà hàng</h4>
+              <p>
+                Nhà hàng Opera: Là nhà hàng Ý mang phong cách trattoria truyền
+                thống nằm ở tầng trệt khách sạn
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Services Section End -->
+
+    <!-- Home Room Section Begin -->
+    <section class="home-room">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-title">
+              <h5>Phòng ở HUFLIT</h5>
+              <h2>Phòng nổi bật</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 20px 0" class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+            <div
+              class="home__room__item set-bg"
+              data-setbg="/client/img/home-room/hr-1.jpg"
+            >
+              <div class="home__room__title">
+                <h4>Superior Giường King, Quang Cảnh Thành Phố</h4>
+                <h2><sup></sup>850.000 <span></span></h2>
+              </div>
+              <a href="/rooms/booking/t01">Đặt ngay</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+            <div
+              class="home__room__item set-bg"
+              data-setbg="/client/img/home-room/hr-2.jpg"
+            >
+              <div class="home__room__title">
+                <h4>Junior Suite, Ban Công, Trực Diện Biển</h4>
+                <h2><sup></sup>1.350.000 <span></span></h2>
+              </div>
+              <a href="/rooms/booking/t04">Đặt ngay</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+            <div
+              class="home__room__item set-bg"
+              data-setbg="/client/img/home-room/hr-3.jpg"
+            >
+              <div class="home__room__title">
+                <h4>SALA Suite, Ban Công, Trực Diện Biển</h4>
+                <h2><sup></sup>1.500.000 <span></span></h2>
+              </div>
+              <a href="/rooms/booking/t05">Đặt ngay</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+            <div
+              class="home__room__item set-bg"
+              data-setbg="/client/img/home-room/hr-4.jpg"
+            >
+              <div class="home__room__title">
+                <h4>Executive Suite</h4>
+                <h2><sup></sup>800.000<span></span></h2>
+              </div>
+              <a href="/rooms/booking/t07">Đặt ngay</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Home Room Section End -->
+
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Js Plugins -->
+
+    <script src="/client/js/toastr.js"></script>
+    <script src="/client/js/header.js"></script>
+    <script src="/client/js/setheader.js"></script>
+  </body>
+</html>

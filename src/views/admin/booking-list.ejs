@@ -1,0 +1,346 @@
+<!-- boostrap 5 -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous"
+/>
+<script src="https://kit.fontawesome.com/1ca5983c13.js" crossorigin="anonymous"></script>
+<!-- jquery database -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<style>
+ 
+  a {
+    text-decoration: none;
+  }
+  .btn {
+    padding: 0.625rem 1.5rem;
+    background-color: #e91e63;
+ 
+  }
+  .btn:hover,.btn:focus,.btn:active  {
+    background-color: #ec437c;
+  }
+  .befn::before{
+     display: none!important;
+  }
+  .befn::after{
+  display: none!important;
+  }
+
+ 
+  .form-label {
+    font-weight: bold;
+  }
+  .ip-check{
+    display: "";
+  }
+  .none-ele{
+    display: none;
+  }
+
+
+
+
+/* Dropdown */
+
+.dropdown-cus {
+  display: inline-block;
+  position: relative;
+  
+}
+
+.dd-button {
+  display: inline-block;
+  border-radius: 4px;
+  width:80px;
+  text-align: center;
+  height: 30px;
+  padding: 0 20px;
+  line-height: 30px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dd-button i{
+  color: #6b6e72;
+}
+
+/* .dd-button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+} */
+
+/* .dd-button:hover {
+  background-color: #ebdddd;
+} */
+
+
+.dd-input {
+  display: none;
+}
+
+.dd-menu {
+  width:110px;
+  position: absolute;
+  z-index: 2222222;
+  top: calc(100% + 5px);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  list-style-type: none;
+  text-align: center;
+}
+
+.dd-input + .dd-menu {
+  display: none;
+} 
+
+.dd-input:checked + .dd-menu {
+  display: block;
+} 
+
+.dd-menu li {
+ 
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dd-menu li:hover {
+  background-color: #f6f6f6;
+}
+
+.dd-menu li a {
+  display: block;
+padding: 10px 0;
+}
+
+.dd-menu li.divider{
+  padding: 0;
+  border-bottom: 1px solid #cccccc;
+}
+</style>
+<h4>Danh sách đặt phòng </h4>
+<div class="row mt-3">
+  <div class="col-md-4 col-sm-4">
+    <div class="input-group input-group-outline mb-3 focused is-focused">
+      <label class="form-label">Từ ngày</label>
+      <input id="since" type="date"   class="form-control" />
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4">
+    <div class="input-group input-group-outline mb-3 focused is-focused">
+      <label class="form-label">Đến ngày</label>
+      <input id="arrive" type="date"  class="form-control" />
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-3">
+    <button class="btn btn-getListBooking btn-primary">Lọc</button>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt-3">
+    <!-- <a href="javascript:window.print()">print this page</a> -->
+    <table id="table_id" class="display" class="table table-sm">
+      <thead>
+        <tr>
+          <!-- <th scope="col">Mã phòng</th> -->
+ 
+          <th >ID</th>
+        
+          <th style="width:80px" scope="col">Loại phòng</th>
+          <th scope="col">Ngày đến</th>
+          <th scope="col">Ngày đi</th>
+          <th scope="col">Tên khách</th>
+          <th scope="col">Số điện thoại</th>
+          <th scope="col">Trạng thái</th>
+        <th class="befn aftn"></th>
+        </tr>
+      </thead>
+      <tbody id="renderData">
+       
+
+        <% for(var i=0; i<data.length; i++) {%>
+          <tr style="font-size:14px">
+            <td ><%= data[i].bookingID %></td>
+            <td><%= data[i].bookingData.roomData.nameType %></td>
+            <td><%= data[i].checkin %></td>
+            <td><%= data[i].checkout %></td>
+            <td><%= data[i].userData.info.fullName %></td>
+            <td><%= data[i].userData.info.phone %></td>
+           
+            <td style="text-align:center;"><%= data[i].status %></td>
+            <td>
+              
+              <label class="dropdown-cus">
+
+                <div class="dd-button">
+                  <i class="material-icons opacity-10">border_color</i>
+                </div>
+              
+                <input type="checkbox" class="dd-input" id="test">
+              
+                <ul class="dd-menu">
+                  <li><a  href="/admin/booking-list/detail/<%= data[i].bookingID %>">Chi tiết</a></li>
+                  <%if (data[i].status =='đã nhận phòng') {%>  
+                     <li>
+                       <a href="/admin/booking-list/payment/<%= data[i].bookingID %>">Thanh toán</a>
+                    </li>  
+                    
+                    <%}%>
+                 
+                 
+                   <%if (data[i].status =='đã đặt') {%>  
+                    <li><a  href="/admin/booking-list/checkout/<%= data[i].bookingID %>">Nhận phòng</a></li>
+                    <li><a  href="/admin/booking-list/cancel/<%= data[i].bookingID %>">Hủy</a></li>    
+  
+                   <%}%>
+                   
+                 
+                  
+                </ul>
+                
+              </label>
+            </td>
+            
+            <!-- <td><a class="btn btn-detail" role="button" href="">Chi tiết</a></td>
+            <td><a class="btn btn-update" role="button" href="">Cập nhật</a></td>
+            <td><a class="btn btn-payment btn-primary" role="button" href="">Thanh toán</a></td> -->
+          
+          </tr>
+       <% } %>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- nhúng jquery và dataTables -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<!-- <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"
+></script> -->
+
+<!-- thiết lập ngày tháng và lọc data -->
+<script>
+  $(document).ready(()=> {
+    $('#table_id').DataTable({
+    });
+
+    $('.btn-getListBooking').click(()=>{
+      let checkin=$('#since').val()
+      ,checkout=$('#arrive').val();
+      window.location.href=`/admin/booking-list/?dayStart=${checkin}&dayEnd=${checkout}`
+      // axios.post('/admin/booking-list',{
+      //   data:{checkin,checkout}
+      // })
+      // .then(res=>RenderData(res.data))
+      // .catch(err=>console.log(err))
+
+    })
+
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+    });
+let dayStart = params.dayStart; 
+let dayEnd = params.dayEnd; 
+let today;
+let tomorrow;
+
+if(dayStart&&dayEnd){
+  today=new Date(dayStart);
+  tomorrow=new Date(dayEnd);;
+}
+else{
+  today = new Date();
+  tomorrow  = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+}
+    today=today.toISOString().split('T')[0]
+    tomorrow=tomorrow.toISOString().split('T')[0]
+   
+   $('#arrive').val(tomorrow)
+   $('#since').val(today)
+
+   function RenderData(data) {
+     let html='';
+    data.forEach(item=> {
+      let btnP='';
+      let btnU='';
+      if(item.status=='đã đặt')
+     {
+      btnP=`<li><a href="booking-list/checkout/${item.bookingID}">Nhận phòng</a></li>`
+      btnU=`<li><a href="booking-list/cancel/${item.bookingID}">Hủy</a></li>`
+     }
+     if(item.status=='đã nhận phòng'){
+      btnP=`<li><a href="booking-list/payment/${item.bookingID}">Thanh toán</a></li>`
+     } 
+    
+     html+=` <tr style="font-size:14px">
+      <td >${item.bookingID}</td>
+            <td>${item.bookingData.roomData.nameType}</td>
+            <td>${item.checkin} </td>
+            <td>${item.checkout} </td>
+            <td>${item.userData.info.fullName} </td>
+            <td>${item.userData.info.phone} </td>
+            <td style="text-align:center;">${item.status} </td>
+            <td>
+              <label class="dropdown-cus">
+                  <div class="dd-button">
+                   Thực hiện
+                  </div>
+                   <input type="checkbox" class="dd-input" id="test">
+                   <ul class="dd-menu">  
+                    ${btnP}
+                  <li><a  href="booking-list/detail/${item.bookingID}">Chi tiết</a></li>
+                  ${btnU}
+                </ul>
+              </label>   
+            </td>
+          </tr>`            
+    })
+
+    $('#renderData').html(html)
+   }
+
+
+});
+</script>
+<!-- thiết lập front end -->
+<script>
+  let listText = document.querySelectorAll(
+    '.navbar-vertical .navbar-nav>.nav-item .nav-link'
+  );
+  listText.forEach((item) => {
+    if (
+      item.classList.contains('active') &&
+      item.classList.contains('bg-gradient-primary')
+    )
+      item.classList.remove('active');
+    item.classList.remove('bg-gradient-primary');
+  });
+  document.querySelector('.booking-list').classList.add('active');
+  document.querySelector('.booking-list').classList.add('bg-gradient-primary');
+
+  document.querySelector(
+    '.breadcrumb-item.text-sm.text-dark.active'
+  ).textContent = 'Danh sách phiếu đặt phòng';
+  document.querySelector('.breadcrumb-item a').textContent = 'Phiếu đặt phòng';
+  document
+    .querySelector('.breadcrumb-item a')
+    .setAttribute('href', '/admin/booking-list');
+</script>
