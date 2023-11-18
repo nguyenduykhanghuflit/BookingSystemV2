@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng ký</title>
-    <!-- icon web -->
-    <link
-      rel="icon"
-      href="https://www.pinpng.com/pngs/m/144-1449172_hotel-png-icon-hotel-vector-icon-png-transparent.png"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
-    />
-    <style>
-      /*
+   <head>
+      <meta charset="UTF-8" />
+      <meta
+         http-equiv="X-UA-Compatible"
+         content="IE=edge" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1.0" />
+      <title>Đăng ký</title>
+      <!-- icon web -->
+      <link
+         rel="icon"
+         href="https://www.pinpng.com/pngs/m/144-1449172_hotel-png-icon-hotel-vector-icon-png-transparent.png" />
+      <link
+         rel="stylesheet"
+         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+      <style>
+         /*
 *
 * ==========================================
 * CUSTOM UTIL CLASSES
@@ -27,31 +28,31 @@
 *
 */
 
-      .border-md {
-        border-width: 2px;
-      }
+         .border-md {
+            border-width: 2px;
+         }
 
-      .btn-facebook {
-        background: #405d9d;
-        border: none;
-      }
+         .btn-facebook {
+            background: #405d9d;
+            border: none;
+         }
 
-      .btn-facebook:hover,
-      .btn-facebook:focus {
-        background: #314879;
-      }
+         .btn-facebook:hover,
+         .btn-facebook:focus {
+            background: #314879;
+         }
 
-      .btn-twitter {
-        background: #42aeec;
-        border: none;
-      }
+         .btn-twitter {
+            background: #42aeec;
+            border: none;
+         }
 
-      .btn-twitter:hover,
-      .btn-twitter:focus {
-        background: #1799e4;
-      }
+         .btn-twitter:hover,
+         .btn-twitter:focus {
+            background: #1799e4;
+         }
 
-      /*
+         /*
 *
 * ==========================================
 * FOR DEMO PURPOSES
@@ -59,312 +60,308 @@
 *
 */
 
-      body {
-        min-height: 100vh;
-      }
+         body {
+            min-height: 100vh;
+         }
 
-      .form-control:not(select) {
-        padding: 1.5rem 0.5rem;
-      }
+         .form-control:not(select) {
+            padding: 1.5rem 0.5rem;
+         }
 
-      select.form-control {
-        height: 52px;
-        padding-left: 0.5rem;
-      }
+         select.form-control {
+            height: 52px;
+            padding-left: 0.5rem;
+         }
 
-      .form-control::placeholder {
-        color: #ccc;
-        font-weight: bold;
-        font-size: 0.9rem;
-      }
-      select {
-        color: #ccc;
-        font-weight: bold;
-        font-size: 0.9rem;
-      }
-      .form-control:focus {
-        box-shadow: none;
-      }
-      .show-err {
-        color: red;
-        font-weight: bold;
-        font-size: 15px;
-        display: none;
-      }
-      .loading {
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background-color: rgba(228, 215, 215, 0.2);
-        position: fixed;
-        z-index: 999999;
-        display: none;
-        align-items: center;
-        justify-content: center;
-      }
-      .loader {
-        height: 5rem;
-        width: 5rem;
-        border-radius: 50%;
-        border: 3px solid rgb(220, 217, 213);
-        border-top-color: #002147;
-        box-sizing: border-box;
-        background: transparent;
-        animation: loading 1s linear infinite;
-        position: absolute;
-        top: 20%;
-      }
+         .form-control::placeholder {
+            color: #ccc;
+            font-weight: bold;
+            font-size: 0.9rem;
+         }
+         select {
+            color: #ccc;
+            font-weight: bold;
+            font-size: 0.9rem;
+         }
+         .form-control:focus {
+            box-shadow: none;
+         }
+         .show-err {
+            color: red;
+            font-weight: bold;
+            font-size: 15px;
+            display: none;
+         }
+         .loading {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(228, 215, 215, 0.2);
+            position: fixed;
+            z-index: 999999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+         }
+         .loader {
+            height: 5rem;
+            width: 5rem;
+            border-radius: 50%;
+            border: 3px solid rgb(220, 217, 213);
+            border-top-color: #002147;
+            box-sizing: border-box;
+            background: transparent;
+            animation: loading 1s linear infinite;
+            position: absolute;
+            top: 20%;
+         }
 
-      @keyframes loading {
-        0% {
-          transform: rotate(0deg);
-        }
-        0% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="loading">
-      <div class="loader"></div>
-    </div>
-    <!-- Navbar-->
-    <header class="header">
-      <nav class="navbar navbar-expand-lg navbar-light py-3">
-        <div class="container">
-          <!-- Navbar Brand -->
-          <a href="#" class="navbar-brand"> Huflit Hotel </a>
-        </div>
-      </nav>
-    </header>
-
-    <div class="container">
-      <div class="row align-items-center">
-        <!-- For Demo Purpose -->
-        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
-          <img
-            src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg"
-            alt=""
-            class="img-fluid mb-3 d-none d-md-block"
-          />
-          <h1>Welcome to Huflit</h1>
-        </div>
-
-        <!-- Registeration Form -->
-        <div class="col-md-7 col-lg-6 ml-auto">
-          <p class="show-err">p</p>
-          <form>
-            <div class="row">
-              <!-- First Name -->
-              <div class="input-group col-lg-12 mb-4">
-                <div class="input-group-prepend">
-                  <span
-                    class="input-group-text bg-white px-4 border-md border-right-0"
-                  >
-                    <i class="fa fa-user-plus text-muted"></i>
-                  </span>
-                </div>
-                <input
-                  id="fullName"
-                  type="text"
-                  name="firstname"
-                  placeholder="First Name"
-                  class="form-control bg-white border-left-0 border-md"
-                />
-              </div>
-              <div class="input-group col-lg-12 mb-4">
-                <div class="input-group-prepend">
-                  <span
-                    class="input-group-text bg-white px-4 border-md border-right-0"
-                  >
-                    <i class="fa fa-mars-stroke text-muted"></i>
-                  </span>
-                </div>
-                <select
-                  id="gender"
-                  name="firstname"
-                  class="form-control bg-white border-left-0 border-md"
-                >
-                  <option value="Nam">Nam</option>
-                  <option value="Nữ">Nữ</option>
-                </select>
-              </div>
-
-              <!-- UserName -->
-              <div class="input-group col-lg-12 mb-4">
-                <div class="input-group-prepend">
-                  <span
-                    class="input-group-text bg-white px-4 border-md border-right-0"
-                  >
-                    <i class="fa fa-user text-muted"></i>
-                  </span>
-                </div>
-                <input
-                  id="username"
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  class="form-control bg-white border-left-0 border-md"
-                />
-              </div>
-
-              <!-- Email Address -->
-              <div class="input-group col-lg-12 mb-4">
-                <div class="input-group-prepend">
-                  <span
-                    class="input-group-text bg-white px-4 border-md border-right-0"
-                  >
-                    <i class="fa fa-envelope text-muted"></i>
-                  </span>
-                </div>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  class="form-control bg-white border-left-0 border-md"
-                />
-              </div>
-
-              <!-- Phone Number -->
-              <div class="input-group col-lg-12 mb-4">
-                <div class="input-group-prepend">
-                  <span
-                    class="input-group-text bg-white px-4 border-md border-right-0"
-                  >
-                    <i class="fa fa-phone-square text-muted"></i>
-                  </span>
-                </div>
-
-                <input
-                  id="phone"
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  class="form-control bg-white border-md border-left-0 pl-3"
-                />
-              </div>
-
-              <!-- Password -->
-              <div class="input-group col-lg-12 mb-4">
-                <div class="input-group-prepend">
-                  <span
-                    class="input-group-text bg-white px-4 border-md border-right-0"
-                  >
-                    <i class="fa fa-lock text-muted"></i>
-                  </span>
-                </div>
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  class="form-control bg-white border-left-0 border-md"
-                />
-              </div>
-
-              <!-- Submit Button -->
-              <div class="form-group col-lg-12 mx-auto mb-0">
-                <button
-                  type="button"
-                  class="btn btn-primary font-weight-bold btn-block py-2"
-                  id="btnAdd"
-                >
-                  Đăng ký
-                </button>
-              </div>
-
-              <!-- Divider Text -->
-              <div
-                class="form-group col-lg-12 mx-auto d-flex align-items-center my-4"
-              >
-                <div class="border-bottom w-100 ml-5"></div>
-                <span class="px-2 small text-muted font-weight-bold text-muted"
-                  >HOẶC</span
-                >
-                <div class="border-bottom w-100 mr-5"></div>
-              </div>
-
-              <!-- Already Registered -->
-              <div class="text-center w-100">
-                <p class="text-muted font-weight-bold">
-                  Đã có tài khoản?
-                  <a href="/login" class="text-primary ml-2">Đăng nhập</a>
-                </p>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script>
-    // For Demo Purpose [Changing input group text on focus]
-    $(function () {
-      $('input, select').on('focus', function () {
-        $(this)
-          .parent()
-          .find('.input-group-text')
-          .css('border-color', '#80bdff');
-      });
-      $('input, select').on('blur', function () {
-        $(this)
-          .parent()
-          .find('.input-group-text')
-          .css('border-color', '#ced4da');
-      });
-    });
-  </script>
-  <script>
-    function GetData() {
-      let username = $('#username').val();
-      let password = $('#password').val();
-      let fullName = $('#fullName').val();
-      let gender = $('#gender').val();
-      let email = $('#email').val();
-      let phone = $('#phone').val();
-      return { username, password, fullName, gender, email, phone };
-    }
-    function ShowErr(mess) {
-      $('.show-err').html(mess);
-      $('.show-err').css('display', 'block');
-    }
-    function HideErr() {
-      $('.show-err').html('');
-      $('.show-err').css('display', 'none');
-    }
-    $(document).ready(() => {
-      $('#btnAdd').click(() => {
-        $('.loading').css('display', 'flex');
-        let data = GetData();
-        // console.log(data);
-
-        axios
-          .post('/register', { data })
-          .then((res) => {
-            $('.loading').css('display', 'none');
-            let mess = res.data;
-            console.log(mess);
-            if (mess == 'Data Invalid')
-              ShowErr('Bạn cần nhập đầy đủ thông tin');
-            else if (mess == 'User Invalid') ShowErr('Username đã tồn tại');
-            else if (mess == 'Email Invalid') ShowErr('Email không hợp lệ');
-            else if (mess == 'Phone Invalid')
-              ShowErr('Số điện thoại không hợp lệ');
-            else {
-              HideErr();
-              alert('Đăng ký thành công');
-              window.location.href = '/login';
+         @keyframes loading {
+            0% {
+               transform: rotate(0deg);
             }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+            0% {
+               transform: rotate(360deg);
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <div class="loading">
+         <div class="loader"></div>
+      </div>
+      <!-- Navbar-->
+      <header class="header">
+         <nav class="navbar navbar-expand-lg navbar-light py-3">
+            <div class="container">
+               <!-- Navbar Brand -->
+               <a
+                  href="#"
+                  class="navbar-brand">
+                  ANG HOTEL
+               </a>
+            </div>
+         </nav>
+      </header>
+
+      <div class="container">
+         <div class="row align-items-center">
+            <!-- For Demo Purpose -->
+            <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+               <img
+                  src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg"
+                  alt=""
+                  class="img-fluid mb-3 d-none d-md-block" />
+               <h1>Welcome to ANG</h1>
+            </div>
+
+            <!-- Registeration Form -->
+            <div class="col-md-7 col-lg-6 ml-auto">
+               <p class="show-err">p</p>
+               <form>
+                  <div class="row">
+                     <!-- First Name -->
+                     <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                           <span
+                              class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-user-plus text-muted"></i>
+                           </span>
+                        </div>
+                        <input
+                           id="fullName"
+                           type="text"
+                           name="firstname"
+                           placeholder="First Name"
+                           class="form-control bg-white border-left-0 border-md" />
+                     </div>
+                     <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                           <span
+                              class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-mars-stroke text-muted"></i>
+                           </span>
+                        </div>
+                        <select
+                           id="gender"
+                           name="firstname"
+                           class="form-control bg-white border-left-0 border-md">
+                           <option value="Nam">Nam</option>
+                           <option value="Nữ">Nữ</option>
+                        </select>
+                     </div>
+
+                     <!-- UserName -->
+                     <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                           <span
+                              class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-user text-muted"></i>
+                           </span>
+                        </div>
+                        <input
+                           id="username"
+                           type="text"
+                           name="username"
+                           placeholder="Username"
+                           class="form-control bg-white border-left-0 border-md" />
+                     </div>
+
+                     <!-- Email Address -->
+                     <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                           <span
+                              class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-envelope text-muted"></i>
+                           </span>
+                        </div>
+                        <input
+                           id="email"
+                           type="email"
+                           name="email"
+                           placeholder="Email Address"
+                           class="form-control bg-white border-left-0 border-md" />
+                     </div>
+
+                     <!-- Phone Number -->
+                     <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                           <span
+                              class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-phone-square text-muted"></i>
+                           </span>
+                        </div>
+
+                        <input
+                           id="phone"
+                           type="tel"
+                           name="phone"
+                           placeholder="Phone Number"
+                           class="form-control bg-white border-md border-left-0 pl-3" />
+                     </div>
+
+                     <!-- Password -->
+                     <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                           <span
+                              class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-lock text-muted"></i>
+                           </span>
+                        </div>
+                        <input
+                           id="password"
+                           type="password"
+                           name="password"
+                           placeholder="Password"
+                           class="form-control bg-white border-left-0 border-md" />
+                     </div>
+
+                     <!-- Submit Button -->
+                     <div class="form-group col-lg-12 mx-auto mb-0">
+                        <button
+                           type="button"
+                           class="btn btn-primary font-weight-bold btn-block py-2"
+                           id="btnAdd">
+                           Đăng ký
+                        </button>
+                     </div>
+
+                     <!-- Divider Text -->
+                     <div
+                        class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                        <div class="border-bottom w-100 ml-5"></div>
+                        <span
+                           class="px-2 small text-muted font-weight-bold text-muted"
+                           >HOẶC</span
+                        >
+                        <div class="border-bottom w-100 mr-5"></div>
+                     </div>
+
+                     <!-- Already Registered -->
+                     <div class="text-center w-100">
+                        <p class="text-muted font-weight-bold">
+                           Đã có tài khoản?
+                           <a
+                              href="/login"
+                              class="text-primary ml-2"
+                              >Đăng nhập</a
+                           >
+                        </p>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </body>
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script>
+      // For Demo Purpose [Changing input group text on focus]
+      $(function () {
+         $('input, select').on('focus', function () {
+            $(this)
+               .parent()
+               .find('.input-group-text')
+               .css('border-color', '#80bdff');
+         });
+         $('input, select').on('blur', function () {
+            $(this)
+               .parent()
+               .find('.input-group-text')
+               .css('border-color', '#ced4da');
+         });
       });
-    });
-  </script>
+   </script>
+   <script>
+      function GetData() {
+         let username = $('#username').val();
+         let password = $('#password').val();
+         let fullName = $('#fullName').val();
+         let gender = $('#gender').val();
+         let email = $('#email').val();
+         let phone = $('#phone').val();
+         return { username, password, fullName, gender, email, phone };
+      }
+      function ShowErr(mess) {
+         $('.show-err').html(mess);
+         $('.show-err').css('display', 'block');
+      }
+      function HideErr() {
+         $('.show-err').html('');
+         $('.show-err').css('display', 'none');
+      }
+      $(document).ready(() => {
+         $('#btnAdd').click(() => {
+            $('.loading').css('display', 'flex');
+            let data = GetData();
+            // console.log(data);
+
+            axios
+               .post('/register', { data })
+               .then((res) => {
+                  $('.loading').css('display', 'none');
+                  let mess = res.data;
+                  console.log(mess);
+                  if (mess == 'Data Invalid')
+                     ShowErr('Bạn cần nhập đầy đủ thông tin');
+                  else if (mess == 'User Invalid')
+                     ShowErr('Username đã tồn tại');
+                  else if (mess == 'Email Invalid')
+                     ShowErr('Email không hợp lệ');
+                  else if (mess == 'Phone Invalid')
+                     ShowErr('Số điện thoại không hợp lệ');
+                  else {
+                     HideErr();
+                     alert('Đăng ký thành công');
+                     window.location.href = '/login';
+                  }
+               })
+               .catch((err) => {
+                  console.log(err);
+               });
+         });
+      });
+   </script>
 </html>

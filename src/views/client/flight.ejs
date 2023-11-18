@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zxx">
+   <head>
+      <meta charset="UTF-8" />
+      <meta
+         name="description"
+         content="Hiroto Template" />
+      <meta
+         name="keywords"
+         content="Hiroto, unica, creative, html" />
+      <meta
+         name="viewport"
+         content="width=dev-width, initial-scale=1.0" />
+      <meta
+         http-equiv="X-UA-Compatible"
+         content="ie=edge" />
+
+      <title>BookingSystem</title>
+
+      <!-- icon web -->
+      <link
+         rel="icon"
+         href="/client/img/iconlogo.png" />
+      <link
+         href="https://fonts.googleapis.com/css?family=Lato:400,600,700,300"
+         rel="stylesheet"
+         type="text/css" />
+      <link
+         href="https://fonts.googleapis.com/icon?family=Material+Icons"
+         rel="stylesheet" />
+      <!--boxi icon -->
+      <link
+         href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+         rel="stylesheet" />
+      <link
+         rel="stylesheet"
+         href="/client/css/elegant-icons.css"
+         type="text/css" />
+      <!-- fontawesome -->
+      <link
+         rel="stylesheet"
+         href="/client/css/font-awesome.min.css"
+         type="text/css" />
+      <link
+         rel="stylesheet"
+         href="/client/css/bootstrap.min.css"
+         type="text/css" />
+      <link
+         rel="stylesheet"
+         href="/client/css/header-bootstrap.css"
+         type="text/css" />
+
+      <!-- Css Styles -->
+      <link
+         rel="stylesheet"
+         href="/client/css/owl.carousel.min.css"
+         type="text/css" />
+
+      <link
+         rel="stylesheet"
+         href="/client/css/style.css"
+         type="text/css" />
+      <link
+         rel="stylesheet"
+         href="/client/css/header.css"
+         type="text/css" />
+      <link
+         rel="stylesheet"
+         href="/client/css/room.css"
+         type="text/css" />
+
+      <link
+         rel="stylesheet"
+         href="/client/css/flight.css"
+         type="text/css" />
+
+      <!-- toast -->
+      <link
+         rel="stylesheet"
+         href="/client/css/toastr.css"
+         type="text/css" />
+
+      <style>
+         #booking {
+            background-image: url('https://vietnamnomad.com/wp-content/uploads/2022/01/Ho-Chi-Minh-City-Travel-Guide-2022-Vietnamnomad.jpeg');
+            height: 600px;
+         }
+         .booking-form {
+            height: auto;
+         }
+      </style>
+   </head>
+
+   <% const {airports,flights,filter} = data; %>
+
+   <body>
+      <div class="loading">
+         <div class="loader"></div>
+      </div>
+      <div id="header">
+         <div class="header-nav">
+            <div class="header-logo">
+               <img
+                  src="/client/img/mylogo.svg"
+                  alt=""
+                  class="logo" />
+            </div>
+            <ul class="nav-list">
+               <li class="nav-item">
+                  <a
+                     href="/"
+                     class="nav-link-nb"
+                     >Trang chủ</a
+                  >
+               </li>
+
+               <li class="nav-item">
+                  <a
+                     href="/rooms"
+                     class="nav-link-nb"
+                     >Khách sạn & Resort</a
+                  >
+               </li>
+               <li class="nav-item">
+                  <a
+                     href="/Flights"
+                     class="nav-link-nb nav-link-nb-main"
+                     >Vé máy bay</a
+                  >
+               </li>
+               <li class="nav-item">
+                  <a
+                     href="/hotel"
+                     class="nav-link-nb"
+                     >Thông tin</a
+                  >
+               </li>
+               <li class="nav-item">
+                  <a
+                     href="/location"
+                     class="nav-link-nb"
+                     >Vị trí</a
+                  >
+               </li>
+            </ul>
+         </div>
+         <div class="header-account">
+            <a
+               class="btn-login btn-account"
+               href="/login"
+               ><i class="bx bx-user"></i>Đăng nhập
+            </a>
+            <a
+               class="btn-register btn-account"
+               href="/register"
+               >Đăng ký
+            </a>
+         </div>
+      </div>
+      <div
+         id="booking"
+         class="section">
+         <div class="section-center">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="section-title">
+                        <h5
+                           style="
+                              font-size: 30px;
+                              color: #fff;
+                              font-weight: bold;
+                           ">
+                           Tìm chuyến bay nhanh chóng, dễ dàng
+                        </h5>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- booking form -->
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="booking-form">
+                        <form name="booking-form">
+                           <div class="row">
+                              <!-- bắt đầu từ -->
+                              <div class="col-4">
+                                 <div class="form-group">
+                                    <span class="form-label">Thành phố đi</span>
+                                    <select
+                                       id="departure_airport_id"
+                                       name="departure_airport_id"
+                                       required
+                                       class="form-control">
+                                       <option value="0">
+                                          Chọn 1 thành phố hoặc sân bay
+                                       </option>
+                                       <% airports.forEach(function(airport) {
+                                       %>
+                                       <option
+                                          value="<%= airport.ariport_id %>">
+                                          <%= airport.province %> ( <%=
+                                          airport.airport %> )
+                                       </option>
+                                       <% }) %>
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                 </div>
+                              </div>
+                              <!-- kết thúc ở -->
+                              <div class="col-4">
+                                 <div class="form-group">
+                                    <span class="form-label"
+                                       >Thành phố đến</span
+                                    >
+                                    <select
+                                       id="arrival_airport_id"
+                                       name="arrival_airport_id"
+                                       required
+                                       class="form-control">
+                                       <option value="0">
+                                          Chọn 1 thành phố hoặc sân bay
+                                       </option>
+                                       <% airports.forEach(function(airport) {
+                                       %>
+                                       <option
+                                          value="<%= airport.ariport_id %>">
+                                          <%= airport.province %> ( <%=
+                                          airport.airport %> )
+                                       </option>
+                                       <% }) %>
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                 </div>
+                              </div>
+
+                              <!-- check in -->
+                              <div class="col-4">
+                                 <div class="form-group">
+                                    <input
+                                       id="departure_date"
+                                       name="departure_date"
+                                       class="form-control sn input-not-empty"
+                                       type="date"
+                                       required />
+                                    <span class="form-label">Ngày đi</span>
+                                 </div>
+                              </div>
+
+                              <!-- chọn hãng hàng không -->
+                              <div class="col-4">
+                                 <div class="form-group">
+                                    <span class="form-label"
+                                       >Hãng hàng không</span
+                                    >
+                                    <select
+                                       id="airline"
+                                       name="airline"
+                                       required
+                                       class="form-control">
+                                       <option value="0">Tất cả</option>
+                                       <option value="1">
+                                          Vietnam Airline
+                                       </option>
+                                       <option value="2">Bamboo Airways</option>
+                                       <option value="3">
+                                          Vietravel Airlines
+                                       </option>
+                                       <option value="4">Vietjet Air</option>
+                                       <option value="5">
+                                          Jetstar Pacific Airlines
+                                       </option>
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                 </div>
+                              </div>
+
+                              <!-- Loại vé -->
+                              <div class="col-4">
+                                 <div class="form-group">
+                                    <span class="form-label">Loại vé</span>
+                                    <select
+                                       id="ticket_type"
+                                       name="ticket_type"
+                                       required
+                                       class="form-control">
+                                       <option value="type1">Phổ thông</option>
+                                       <option value="type2">
+                                          Phổ thông cao cấp
+                                       </option>
+                                       <option value="type3">Thương gia</option>
+                                       <option value="type4">Hạng nhất</option>
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                 </div>
+                              </div>
+
+                              <div class="col-4">
+                                 <button
+                                    id="btnFilterFlight"
+                                    type="button"
+                                    class="btn btn-fliter form-group btn-primary">
+                                    Tìm kiếm chuyến bay
+                                 </button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <section
+         style="padding-top: 10px"
+         class="rooms">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="section-title">
+                     <h5 style="font-size: 30px; margin: 10px 0">
+                        <% if (filter) { %> Kết quả tìm kiếm phù hợp <% } else {
+                        %> Các chuyến bay sớm nhất hiện tại <% } %>
+                     </h5>
+                  </div>
+               </div>
+               <div class="col-7 mx-auto">
+                  <% flights.forEach(function(item) { %>
+
+                  <div class="flightticket open">
+                     <div class="flightticket-header">
+                        <div class="flightticket-airport">
+                           <span class="flightticket-label">
+                              <%= item.airline %>, <%=
+                              item.departureAirport.province %> (<%=
+                              item.departureAirport.airport %>)</span
+                           >
+                           <span class="flightticket-airportcode"
+                              ><%= item.departureAirport.code %></span
+                           >
+                        </div>
+                        <div class="flightticket-icon">
+                           <i class="material-icons">flight_takeoff</i>
+                        </div>
+                        <div class="flightticket-airport">
+                           <span class="flightticket-label"
+                              ><%= item.arrivalAirport.province %> (<%=
+                              item.arrivalAirport.airport %>)</span
+                           >
+                           <span class="flightticket-airportcode"
+                              ><%= item.arrivalAirport.code %></span
+                           >
+                        </div>
+                     </div>
+                     <div class="flightticket-details">
+                        <div class="flightticket-content">
+                           <div class="flightticket-block">
+                              <span class="flightticket-label">Ngày đi</span>
+                              <span class="flightticket-value"
+                                 ><%= item.departure_date %></span
+                              >
+                           </div>
+                           <div class="flightticket-block">
+                              <span class="flightticket-label">Giờ đi</span>
+                              <span class="flightticket-value"
+                                 ><%= item.start_time %></span
+                              >
+                           </div>
+                           <div class="flightticket-block">
+                              <span class="flightticket-label">Giờ đến</span>
+                              <span class="flightticket-value"
+                                 ><%= item.end_time %></span
+                              >
+                           </div>
+                           <div class="flightticket-block">
+                              <span class="flightticket-label"
+                                 >Số người lớn</span
+                              >
+                              <span class="flightticket-value">1 người</span>
+                           </div>
+                           <div class="flightticket-block">
+                              <span class="flightticket-label">Giá vé</span>
+                              <span class="flightticket-value"
+                                 ><%= (parseInt(item.price) *
+                                 1000).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                                 ',').slice(0, -2) + 'đ' %></span
+                              >
+                           </div>
+                           <div class="flightticket-block">
+                              <button
+                                 type="button"
+                                 class="btn btn-primary"
+                                 onclick="bookFlight('<%= item.flight_id %>')">
+                                 Đặt ngay
+                              </button>
+                           </div>
+                        </div>
+                        <div class="barcode"></div>
+                     </div>
+                  </div>
+                  <% }) %>
+               </div>
+            </div>
+
+            <div class="btn-on-top"></div>
+         </div>
+      </section>
+
+      <script
+         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+         crossorigin="anonymous"></script>
+
+      <!-- Js Plugins -->
+
+      <!-- <script src="/client/js/jquery-3.3.1.min.js"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+      <script src="/client/js/jquery.slicknav.js"></script>
+      <script src="/client/js/owl.carousel.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <!-- toast -->
+      <script src="/client/js/toastr.js"></script>
+
+      <script src="/client/js/main.js"></script>
+      <script src="/client/js/header.js"></script>
+      <script src="/client/js/setheader.js"></script>
+      <script>
+         function showErr(msg) {
+            toastr['warning'](msg);
+         }
+         function showSuccess(msg) {
+            toastr['success'](msg);
+         }
+         function objectToQueryParam(object) {
+            const params = new URLSearchParams();
+            for (const key in object) {
+               params.append(key, object[key]);
+            }
+            return params.toString();
+         }
+      </script>
+      <script>
+         const today = new Date();
+         function setTodayIsDefault() {
+            const formattedDate = today.toISOString().substr(0, 10);
+            document.getElementById('departure_date').value = formattedDate;
+         }
+
+         function setValueInputFromParam() {
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Check if each parameter exists and set the value of the corresponding input element
+            if (urlParams.has('departure_airport_id')) {
+               $('#departure_airport_id').val(
+                  urlParams.get('departure_airport_id')
+               );
+            }
+            if (urlParams.has('arrival_airport_id')) {
+               $('#arrival_airport_id').val(
+                  urlParams.get('arrival_airport_id')
+               );
+            }
+            if (urlParams.has('departure_date')) {
+               $('#departure_date').val(urlParams.get('departure_date'));
+            } else setTodayIsDefault();
+            if (urlParams.has('airline')) {
+               $('#airline').val(urlParams.get('airline'));
+            }
+            if (urlParams.has('ticket_type')) {
+               $('#ticket_type').val(urlParams.get('ticket_type'));
+            }
+         }
+
+         setValueInputFromParam();
+
+         $('#btnFilterFlight').click((e) => {
+            var formData = $('form[name="booking-form"]').serializeArray();
+            var req = {};
+
+            for (var i = 0; i < formData.length; i++) {
+               var item = formData[i];
+               var value = isNaN(item.value)
+                  ? item.value
+                  : parseInt(item.value);
+               req[item.name] = value;
+            }
+
+            if (!req['departure_airport_id'])
+               return showErr('Vui lòng chọn thành phố đi');
+
+            if (!req['arrival_airport_id'])
+               return showErr('Vui lòng chọn thành phố muốn đến');
+
+            today.setHours(0, 0, 0, 0);
+            if (new Date(req['departure_date']) < today)
+               return showErr('Ngày đi phải tính từ hôm nay');
+
+            const queryString = objectToQueryParam(req);
+            console.log(queryString);
+            window.location.href = `?${queryString}`;
+         });
+
+         function bookFlight(flightId) {
+            var urlParams = new URLSearchParams(window.location.search);
+            const ticketType = urlParams.get('ticket_type') || 'type1';
+            var url =
+               '/flights/detail?flight_id=' +
+               flightId +
+               '&ticket_type=' +
+               ticketType;
+            window.location.href = url;
+         }
+      </script>
+   </body>
+</html>

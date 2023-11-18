@@ -1,0 +1,312 @@
+<!-- boostrap 5 -->
+<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+   crossorigin="anonymous" />
+<script
+   src="https://kit.fontawesome.com/1ca5983c13.js"
+   crossorigin="anonymous"></script>
+<!-- jquery database -->
+<link
+   rel="stylesheet"
+   href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+<style>
+   a {
+      text-decoration: none;
+   }
+   .btn {
+      padding: 0.625rem 1.5rem;
+      background-color: #e91e63;
+   }
+   .btn:hover,
+   .btn:focus,
+   .btn:active {
+      background-color: #ec437c;
+   }
+   .befn::before {
+      display: none !important;
+   }
+   .befn::after {
+      display: none !important;
+   }
+
+   .form-label {
+      font-weight: bold;
+   }
+   .ip-check {
+      display: '';
+   }
+   .none-ele {
+      display: none;
+   }
+
+   /* Dropdown */
+
+   .dropdown-cus {
+      display: inline-block;
+      position: relative;
+   }
+
+   .dd-button {
+      display: inline-block;
+      border-radius: 4px;
+      width: 80px;
+      text-align: center;
+      height: 30px;
+      padding: 0 20px;
+      line-height: 30px;
+      cursor: pointer;
+      white-space: nowrap;
+   }
+   .dd-button i {
+      color: #6b6e72;
+   }
+
+   /* .dd-button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+} */
+
+   /* .dd-button:hover {
+  background-color: #ebdddd;
+} */
+
+   .dd-input {
+      display: none;
+   }
+
+   .dd-menu {
+      width: 110px;
+      position: absolute;
+      z-index: 2222222;
+      top: calc(100% + 5px);
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+      list-style-type: none;
+      text-align: center;
+   }
+
+   .dd-input + .dd-menu {
+      display: none;
+   }
+
+   .dd-input:checked + .dd-menu {
+      display: block;
+   }
+
+   .dd-menu li {
+      cursor: pointer;
+      white-space: nowrap;
+   }
+
+   .dd-menu li:hover {
+      background-color: #f6f6f6;
+   }
+
+   .dd-menu li a {
+      display: block;
+      padding: 10px 0;
+   }
+
+   .dd-menu li.divider {
+      padding: 0;
+      border-bottom: 1px solid #cccccc;
+   }
+</style>
+<% const TICKET_TYPE_NAME = { type1: 'Phổ thông', type2: 'Phổ thông cao cấp',
+type3: 'Thương gia', type4: 'Hạng nhất', }; 
+const statusColors = {
+   WAITING: 'bg-primary',
+   ACCEPT: 'bg-success',
+   CANCEL: 'bg-danger',
+   DONE: 'bg-info'
+ };
+
+%>
+
+
+<h4>Danh sách đặt vé máy bay</h4>
+<div class="row mt-3">
+   <div class="col-md-4 col-sm-4">
+      <div class="input-group input-group-outline mb-3 focused is-focused">
+         <label class="form-label">Từ ngày</label>
+         <input
+            id="since"
+            type="date"
+            class="form-control" />
+      </div>
+   </div>
+   <div class="col-md-4 col-sm-4">
+      <div class="input-group input-group-outline mb-3 focused is-focused">
+         <label class="form-label">Đến ngày</label>
+         <input
+            id="arrive"
+            type="date"
+            class="form-control" />
+      </div>
+   </div>
+   <div class="col-md-3 col-sm-3">
+      <button class="btn btn-getListBooking btn-primary">Lọc</button>
+   </div>
+</div>
+<div class="container">
+   <div class="row mt-3">
+      <!-- <a href="javascript:window.print()">print this page</a> -->
+      <table
+         id="mytable"
+         class="display nowrap"
+         style="width: 100%">
+         <thead>
+            <tr>
+               <th>FlightId</th>
+               <th scope="col">Trạng thái</th>
+               <th scope="col">Người đặt</th>
+               <th scope="col">SĐT</th>
+               <th scope="col">Email</th>
+               <th scope="col">Ngày đặt</th>
+               <th scope="col">Khởi hành</th>
+               <th scope="col">Đi từ</th>
+               <th scope="col">Đi đến</th>
+               <th scope="col">Hãng bay</th>
+               <th scope="col">Loại vé</th>
+               <th scope="col">Hành khách</th>
+               <th scope="col">Tổng tiền</th>
+
+            </tr>
+         </thead>
+         <tbody id="renderData">
+            <% for(var i=0; i<data.length; i++) {%>
+               <tr style="font-size:14px">
+                 <td><a href="/admin/booking-flight/<%= data[i].flight_booking_id %>"><%= data[i].flight_booking_id %></a></td>
+                 <td>
+                  <span class="badge <%= statusColors[data[i].status] %>"><%= data[i].status %></span>
+                </td>
+                 <td><%= data[i].fullnameCustomer %></td>
+                 <td><%= data[i].phoneCustomer %></td>
+                 <td><%= data[i].emailCustomer %></td>
+                 <td><%= data[i].booking_date.toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) %></td>
+                 <td>
+                  <%= data[i].flightData.departure_date %>
+                   (<%= data[i].flightData.start_time %> - <%= data[i].flightData.end_time %>)  
+                </td>
+                <td>
+                  <%= data[i].flightData.departureAirport.province %> -
+                  <%= data[i].flightData.departureAirport.airport %>
+                </td>
+                <td>
+                  <%= data[i].flightData.arrivalAirport.province %> -
+                  <%= data[i].flightData.arrivalAirport.airport %>
+                </td>
+                <td>
+                  <%= data[i].flightData.airline %>     
+                </td>
+                <td>
+                  <%= TICKET_TYPE_NAME[data[i].ticketType] %>     
+                </td>
+                <td>
+                  <%= data[i].adultCount %> người lớn
+                  <%= data[i].childCount %> trẻ em
+                </td>    
+                 <td> <%= new Intl.NumberFormat('vi-VN', {
+                  style: 'currency', currency: 'VND' }).format(data[i].total_price) %></td>
+
+                
+               </tr>
+             <% } %>
+
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<!-- nhúng jquery và dataTables -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+<!-- thiết lập ngày tháng và lọc data -->
+<script>
+   new DataTable('#mytable', {
+      scrollX: true,
+      scrollY: true,
+      ordering: false,
+      fixedColumns: {
+        left: 2
+      },
+    paging: false,
+    scrollCollapse: true,
+      
+   });
+   $(document).ready(() => {
+      $('#table_id').DataTable({});
+
+      $('.btn-getListBooking').click(() => {
+         let checkin = $('#since').val(),
+            checkout = $('#arrive').val();
+         window.location.href = `/admin/booking-flight/?dayStart=${checkin}&dayEnd=${checkout}`;
+      });
+
+      const params = new Proxy(new URLSearchParams(window.location.search), {
+         get: (searchParams, prop) => searchParams.get(prop),
+      });
+      let dayStart = params.dayStart;
+      let dayEnd = params.dayEnd;
+      let today;
+      let tomorrow;
+
+      if (dayStart && dayEnd) {
+         today = new Date(dayStart);
+         tomorrow = new Date(dayEnd);
+      } else {
+         today = new Date();
+         tomorrow = new Date();
+         tomorrow.setDate(tomorrow.getDate() + 1);
+      }
+      today = today.toISOString().split('T')[0];
+      tomorrow = tomorrow.toISOString().split('T')[0];
+
+      $('#arrive').val(tomorrow);
+      $('#since').val(today);
+   });
+</script>
+
+<!-- thiết lập front end -->
+<script>
+   let listText = document.querySelectorAll(
+      '.navbar-vertical .navbar-nav>.nav-item .nav-link'
+   );
+   listText.forEach((item) => {
+      if (
+         item.classList.contains('active') &&
+         item.classList.contains('bg-gradient-primary')
+      )
+         item.classList.remove('active');
+      item.classList.remove('bg-gradient-primary');
+   });
+   document.querySelector('.booking-flight').classList.add('active');
+   document
+      .querySelector('.booking-flight')
+      .classList.add('bg-gradient-primary');
+
+   document.querySelector(
+      '.breadcrumb-item.text-sm.text-dark.active'
+   ).textContent = 'Danh sách vé đã đặt';
+   document.querySelector('.breadcrumb-item a').textContent =
+      'Danh sách đặt vé';
+   document
+      .querySelector('.breadcrumb-item a')
+      .setAttribute('href', '/admin/booking-flight');
+</script>

@@ -31,8 +31,8 @@ class AdminBookingController {
 
       const data = await ADMIN.getAllBookingList(since, arrive);
 
-      // return res.render('admin/booking-list.ejs', { data });
-      return res.send(data);
+      return res.render('admin/booking-list.ejs', { data });
+      // return res.send(data);
    }
 
    //API lọc phiếu đặt phòng

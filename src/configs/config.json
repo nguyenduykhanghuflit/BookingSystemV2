@@ -1,9 +1,10 @@
 {
-  "development": {
-    "username": "root",
-    "password": "password",
-    "database": "HotelBooking",
-    "host": "localhost",
-    "dialect": "mysql"
-  }
+   "development": {
+      "username": "aa1a8d_huflit",
+      "password": "@Khang123",
+      "database": "db_aa1a8d_huflit",
+      "host": "MYSQL5045.site4now.net",
+      "dialect": "mysql",
+      "logging": false
+   }
 }

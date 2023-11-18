@@ -178,8 +178,7 @@ padding: 10px 0;
             <td><%= data[i].checkin %></td>
             <td><%= data[i].checkout %></td>
             <td><%= data[i].userData.info.fullName %></td>
-            <td><%= data[i].userData.info.phone %></td>
-           
+            <td><%= data[i].userData.info.phone %></td>        
             <td style="text-align:center;"><%= data[i].status %></td>
             <td>
               
@@ -213,13 +212,8 @@ padding: 10px 0;
                 
               </label>
             </td>
-            
-            <!-- <td><a class="btn btn-detail" role="button" href="">Chi tiết</a></td>
-            <td><a class="btn btn-update" role="button" href="">Cập nhật</a></td>
-            <td><a class="btn btn-payment btn-primary" role="button" href="">Thanh toán</a></td> -->
-          
           </tr>
-       <% } %>
+        <% } %>
         
       </tbody>
     </table>
@@ -229,11 +223,7 @@ padding: 10px 0;
 <!-- nhúng jquery và dataTables -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<!-- <script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"
-></script> -->
+
 
 <!-- thiết lập ngày tháng và lọc data -->
 <script>
@@ -245,12 +235,7 @@ padding: 10px 0;
       let checkin=$('#since').val()
       ,checkout=$('#arrive').val();
       window.location.href=`/admin/booking-list/?dayStart=${checkin}&dayEnd=${checkout}`
-      // axios.post('/admin/booking-list',{
-      //   data:{checkin,checkout}
-      // })
-      // .then(res=>RenderData(res.data))
-      // .catch(err=>console.log(err))
-
+      
     })
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -275,48 +260,6 @@ else{
    
    $('#arrive').val(tomorrow)
    $('#since').val(today)
-
-   function RenderData(data) {
-     let html='';
-    data.forEach(item=> {
-      let btnP='';
-      let btnU='';
-      if(item.status=='đã đặt')
-     {
-      btnP=`<li><a href="booking-list/checkout/${item.bookingID}">Nhận phòng</a></li>`
-      btnU=`<li><a href="booking-list/cancel/${item.bookingID}">Hủy</a></li>`
-     }
-     if(item.status=='đã nhận phòng'){
-      btnP=`<li><a href="booking-list/payment/${item.bookingID}">Thanh toán</a></li>`
-     } 
-    
-     html+=` <tr style="font-size:14px">
-      <td >${item.bookingID}</td>
-            <td>${item.bookingData.roomData.nameType}</td>
-            <td>${item.checkin} </td>
-            <td>${item.checkout} </td>
-            <td>${item.userData.info.fullName} </td>
-            <td>${item.userData.info.phone} </td>
-            <td style="text-align:center;">${item.status} </td>
-            <td>
-              <label class="dropdown-cus">
-                  <div class="dd-button">
-                   Thực hiện
-                  </div>
-                   <input type="checkbox" class="dd-input" id="test">
-                   <ul class="dd-menu">  
-                    ${btnP}
-                  <li><a  href="booking-list/detail/${item.bookingID}">Chi tiết</a></li>
-                  ${btnU}
-                </ul>
-              </label>   
-            </td>
-          </tr>`            
-    })
-
-    $('#renderData').html(html)
-   }
-
 
 });
 </script>

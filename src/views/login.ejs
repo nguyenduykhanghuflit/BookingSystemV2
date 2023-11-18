@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng nhập</title>
-    <!-- icon web -->
-    <link
-      rel="icon"
-      href="https://www.pinpng.com/pngs/m/144-1449172_hotel-png-icon-hotel-vector-icon-png-transparent.png"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
-    />
-    <style>
-      /*
+   <head>
+      <meta charset="UTF-8" />
+      <meta
+         http-equiv="X-UA-Compatible"
+         content="IE=edge" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1.0" />
+      <title>Đăng nhập</title>
+      <!-- icon web -->
+      <link
+         rel="icon"
+         href="https://www.pinpng.com/pngs/m/144-1449172_hotel-png-icon-hotel-vector-icon-png-transparent.png" />
+      <link
+         rel="stylesheet"
+         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+      <style>
+         /*
 *
 * ==========================================
 * CUSTOM UTIL CLASSES
@@ -27,31 +28,31 @@
 *
 */
 
-      .border-md {
-        border-width: 2px;
-      }
+         .border-md {
+            border-width: 2px;
+         }
 
-      .btn-facebook {
-        background: #405d9d;
-        border: none;
-      }
+         .btn-facebook {
+            background: #405d9d;
+            border: none;
+         }
 
-      .btn-facebook:hover,
-      .btn-facebook:focus {
-        background: #314879;
-      }
+         .btn-facebook:hover,
+         .btn-facebook:focus {
+            background: #314879;
+         }
 
-      .btn-twitter {
-        background: #42aeec;
-        border: none;
-      }
+         .btn-twitter {
+            background: #42aeec;
+            border: none;
+         }
 
-      .btn-twitter:hover,
-      .btn-twitter:focus {
-        background: #1799e4;
-      }
+         .btn-twitter:hover,
+         .btn-twitter:focus {
+            background: #1799e4;
+         }
 
-      /*
+         /*
 *
 * ==========================================
 * FOR DEMO PURPOSES
@@ -59,234 +60,236 @@
 *
 */
 
-      body {
-        min-height: 100vh;
-      }
+         body {
+            min-height: 100vh;
+         }
 
-      .form-control:not(select) {
-        padding: 1.5rem 0.5rem;
-      }
+         .form-control:not(select) {
+            padding: 1.5rem 0.5rem;
+         }
 
-      select.form-control {
-        height: 52px;
-        padding-left: 0.5rem;
-      }
+         select.form-control {
+            height: 52px;
+            padding-left: 0.5rem;
+         }
 
-      .form-control::placeholder {
-        color: #ccc;
-        font-weight: bold;
-        font-size: 0.9rem;
-      }
-      select {
-        color: #ccc;
-        font-weight: bold;
-        font-size: 0.9rem;
-      }
-      .form-control:focus {
-        box-shadow: none;
-      }
-      .show-err {
-        color: red;
-        font-weight: bold;
-        font-size: 15px;
-        display: none;
-      }
-      .loading {
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background-color: rgba(228, 215, 215, 0.2);
-        position: fixed;
-        z-index: 999999;
-        display: none;
-        align-items: center;
-        justify-content: center;
-      }
-      .loader {
-        height: 5rem;
-        width: 5rem;
-        border-radius: 50%;
-        border: 3px solid rgb(220, 217, 213);
-        border-top-color: #002147;
-        box-sizing: border-box;
-        background: transparent;
-        animation: loading 1s linear infinite;
-        position: absolute;
-        top: 20%;
-      }
+         .form-control::placeholder {
+            color: #ccc;
+            font-weight: bold;
+            font-size: 0.9rem;
+         }
+         select {
+            color: #ccc;
+            font-weight: bold;
+            font-size: 0.9rem;
+         }
+         .form-control:focus {
+            box-shadow: none;
+         }
+         .show-err {
+            color: red;
+            font-weight: bold;
+            font-size: 15px;
+            display: none;
+         }
+         .loading {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(228, 215, 215, 0.2);
+            position: fixed;
+            z-index: 999999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+         }
+         .loader {
+            height: 5rem;
+            width: 5rem;
+            border-radius: 50%;
+            border: 3px solid rgb(220, 217, 213);
+            border-top-color: #002147;
+            box-sizing: border-box;
+            background: transparent;
+            animation: loading 1s linear infinite;
+            position: absolute;
+            top: 20%;
+         }
 
-      @keyframes loading {
-        0% {
-          transform: rotate(0deg);
-        }
-        0% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="loading">
-      <div class="loader"></div>
-    </div>
-    <!-- Navbar-->
-    <header class="header">
-      <nav class="navbar navbar-expand-lg navbar-light py-3">
-        <div class="container">
-          <!-- Navbar Brand -->
-          <a href="#" class="navbar-brand"> Huflit Hotel </a>
-        </div>
-      </nav>
-    </header>
-
-    <div class="container">
-      <div class="row align-items-center">
-        <!-- For Demo Purpose -->
-        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
-          <img
-            src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg"
-            alt=""
-            class="img-fluid mb-3 d-none d-md-block"
-          />
-          <h1>Welcome to Huflit</h1>
-        </div>
-
-        <!-- Registeration Form -->
-        <div class="col-md-7 col-lg-6 ml-auto">
-          <p class="show-err"></p>
-          <form>
-            <div class="row">
-              <!-- UserName -->
-              <div class="input-group col-lg-12 mb-4">
-                <div class="input-group-prepend">
-                  <span
-                    class="input-group-text bg-white px-4 border-md border-right-0"
-                  >
-                    <i class="fa fa-user text-muted"></i>
-                  </span>
-                </div>
-                <input
-                  id="username"
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  class="form-control bg-white border-left-0 border-md"
-                />
-              </div>
-
-              <!-- Password -->
-              <div class="input-group col-lg-12 mb-4">
-                <div class="input-group-prepend">
-                  <span
-                    class="input-group-text bg-white px-4 border-md border-right-0"
-                  >
-                    <i class="fa fa-lock text-muted"></i>
-                  </span>
-                </div>
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  class="form-control bg-white border-left-0 border-md"
-                />
-              </div>
-
-              <!-- Submit Button -->
-              <div class="form-group col-lg-12 mx-auto mb-0">
-                <button
-                  type="button"
-                  class="btn btn-primary font-weight-bold btn-block py-2"
-                  id="btnAdd"
-                >
-                  Đăng nhập
-                </button>
-              </div>
-
-              <!-- Divider Text -->
-              <div
-                class="form-group col-lg-12 mx-auto d-flex align-items-center my-4"
-              >
-                <div class="border-bottom w-100 ml-5"></div>
-                <span class="px-2 small text-muted font-weight-bold text-muted"
-                  >HOẶC</span
-                >
-                <div class="border-bottom w-100 mr-5"></div>
-              </div>
-
-              <!-- Already Registered -->
-              <div class="text-center w-100">
-                <p class="text-muted font-weight-bold">
-                  Chưa có tài khoản?
-                  <a href="/register" class="text-primary ml-2">Đăng ký</a>
-                </p>
-              </div>
-            </div>
-          </form>
-        </div>
+         @keyframes loading {
+            0% {
+               transform: rotate(0deg);
+            }
+            0% {
+               transform: rotate(360deg);
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <div class="loading">
+         <div class="loader"></div>
       </div>
-    </div>
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script>
-    // For Demo Purpose [Changing input group text on focus]
-    $(function () {
-      $('input, select').on('focus', function () {
-        $(this)
-          .parent()
-          .find('.input-group-text')
-          .css('border-color', '#80bdff');
-      });
-      $('input, select').on('blur', function () {
-        $(this)
-          .parent()
-          .find('.input-group-text')
-          .css('border-color', '#ced4da');
-      });
-    });
-  </script>
-  <script>
-    function GetData() {
-      let username = $('#username').val();
-      let password = $('#password').val();
+      <!-- Navbar-->
+      <header class="header">
+         <nav class="navbar navbar-expand-lg navbar-light py-3">
+            <div class="container">
+               <!-- Navbar Brand -->
+               <a
+                  href="#"
+                  class="navbar-brand">
+                  ANG HOTEL
+               </a>
+            </div>
+         </nav>
+      </header>
 
-      return { username, password };
-    }
-    function ShowErr(mess) {
-      $('.show-err').html(mess);
-      $('.show-err').css('display', 'block');
-    }
-    function HideErr() {
-      $('.show-err').html('');
-      $('.show-err').css('display', 'none');
-    }
-    $(document).ready(() => {
-      $('#btnAdd').click(() => {
-        let data = GetData();
-        if (data.username.length == 0) {
-          ShowErr('Bạn chưa nhập tên đăng nhập');
-        } else if (data.password.length == 0) {
-          ShowErr('Bạn chưa nhập mật khẩu');
-        } else {
-          $('.loading').css('display', 'flex');
-          axios
-            .post('/login', { data })
-            .then((res) => {
-              $('.loading').css('display', 'none');
+      <div class="container">
+         <div class="row align-items-center">
+            <!-- For Demo Purpose -->
+            <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+               <img
+                  src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg"
+                  alt=""
+                  class="img-fluid mb-3 d-none d-md-block" />
+               <h1>Welcome to ANG</h1>
+            </div>
 
-              if (res.data.message == 'success') {
-                window.location.href = '/login';
-              } else if (res.data.message == 'wrong username')
-                ShowErr('Sai tên đăng nhập');
-              else ShowErr('Sai mật khẩu');
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
+            <!-- Registeration Form -->
+            <div class="col-md-7 col-lg-6 ml-auto">
+               <p class="show-err"></p>
+               <form>
+                  <div class="row">
+                     <!-- UserName -->
+                     <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                           <span
+                              class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-user text-muted"></i>
+                           </span>
+                        </div>
+                        <input
+                           id="username"
+                           type="text"
+                           name="username"
+                           placeholder="Username"
+                           class="form-control bg-white border-left-0 border-md" />
+                     </div>
+
+                     <!-- Password -->
+                     <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                           <span
+                              class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-lock text-muted"></i>
+                           </span>
+                        </div>
+                        <input
+                           id="password"
+                           type="password"
+                           name="password"
+                           placeholder="Password"
+                           class="form-control bg-white border-left-0 border-md" />
+                     </div>
+
+                     <!-- Submit Button -->
+                     <div class="form-group col-lg-12 mx-auto mb-0">
+                        <button
+                           type="button"
+                           class="btn btn-primary font-weight-bold btn-block py-2"
+                           id="btnAdd">
+                           Đăng nhập
+                        </button>
+                     </div>
+
+                     <!-- Divider Text -->
+                     <div
+                        class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                        <div class="border-bottom w-100 ml-5"></div>
+                        <span
+                           class="px-2 small text-muted font-weight-bold text-muted"
+                           >HOẶC</span
+                        >
+                        <div class="border-bottom w-100 mr-5"></div>
+                     </div>
+
+                     <!-- Already Registered -->
+                     <div class="text-center w-100">
+                        <p class="text-muted font-weight-bold">
+                           Chưa có tài khoản?
+                           <a
+                              href="/register"
+                              class="text-primary ml-2"
+                              >Đăng ký</a
+                           >
+                        </p>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </body>
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script>
+      // For Demo Purpose [Changing input group text on focus]
+      $(function () {
+         $('input, select').on('focus', function () {
+            $(this)
+               .parent()
+               .find('.input-group-text')
+               .css('border-color', '#80bdff');
+         });
+         $('input, select').on('blur', function () {
+            $(this)
+               .parent()
+               .find('.input-group-text')
+               .css('border-color', '#ced4da');
+         });
       });
-    });
-  </script>
+   </script>
+   <script>
+      function GetData() {
+         let username = $('#username').val();
+         let password = $('#password').val();
+
+         return { username, password };
+      }
+      function ShowErr(mess) {
+         $('.show-err').html(mess);
+         $('.show-err').css('display', 'block');
+      }
+      function HideErr() {
+         $('.show-err').html('');
+         $('.show-err').css('display', 'none');
+      }
+      $(document).ready(() => {
+         $('#btnAdd').click(() => {
+            let data = GetData();
+            if (data.username.length == 0) {
+               ShowErr('Bạn chưa nhập tên đăng nhập');
+            } else if (data.password.length == 0) {
+               ShowErr('Bạn chưa nhập mật khẩu');
+            } else {
+               $('.loading').css('display', 'flex');
+               axios
+                  .post('/login', { data })
+                  .then((res) => {
+                     $('.loading').css('display', 'none');
+
+                     if (res.data.message == 'success') {
+                        window.location.href = '/login';
+                     } else if (res.data.message == 'wrong username')
+                        ShowErr('Sai tên đăng nhập');
+                     else ShowErr('Sai mật khẩu');
+                  })
+                  .catch((err) => {
+                     console.log(err);
+                  });
+            }
+         });
+      });
+   </script>
 </html>

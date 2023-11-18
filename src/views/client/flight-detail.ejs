@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="vi">
+   <head>
+      <meta charset="UTF-8" />
+      <meta
+         http-equiv="X-UA-Compatible"
+         content="IE=edge" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1.0" />
+      <title>Đặt vé máy bay</title>
+
+      <!-- icon web -->
+      <link
+         rel="icon"
+         href="/client/img/iconlogo.png" />
+      <link
+         href="https://fonts.googleapis.com/css?family=Lato:400,600,700,300"
+         rel="stylesheet"
+         type="text/css" />
+      <link
+         href="https://fonts.googleapis.com/icon?family=Material+Icons"
+         rel="stylesheet" />
+      <!--boxi icon -->
+      <link
+         href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+         rel="stylesheet" />
+      <link
+         rel="stylesheet"
+         href="/client/css/elegant-icons.css"
+         type="text/css" />
+      <!-- fontawesome -->
+      <link
+         rel="stylesheet"
+         href="/client/css/font-awesome.min.css"
+         type="text/css" />
+      <link
+         rel="stylesheet"
+         href="/client/css/bootstrap.min.css"
+         type="text/css" />
+      <link
+         rel="stylesheet"
+         href="/client/css/header-bootstrap.css"
+         type="text/css" />
+
+      <!-- Css Styles -->
+      <link
+         rel="stylesheet"
+         href="/client/css/owl.carousel.min.css"
+         type="text/css" />
+
+      <link
+         rel="stylesheet"
+         href="/client/css/style.css"
+         type="text/css" />
+      <link
+         rel="stylesheet"
+         href="/client/css/header.css"
+         type="text/css" />
+      <link
+         rel="stylesheet"
+         href="/client/css/room.css"
+         type="text/css" />
+
+      <link
+         rel="stylesheet"
+         href="/client/css/flight.css"
+         type="text/css" />
+
+      <!-- toast -->
+      <link
+         rel="stylesheet"
+         href="/client/css/toastr.css"
+         type="text/css" />
+
+      <style>
+         .form-info-booking,
+         .passenger-form {
+            border: 1px solid rgb(129, 123, 123);
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+         }
+         h4 span {
+            color: rgb(48, 47, 45);
+         }
+         #idcard::-webkit-outer-spin-button,
+         #idcard::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="loading">
+         <div class="loader"></div>
+      </div>
+      <div
+         id="header"
+         class="header-scrolled">
+         <div class="header-nav">
+            <div class="header-logo">
+               <img
+                  src="/client/img/mylogo.svg"
+                  alt=""
+                  class="logo" />
+            </div>
+            <ul class="nav-list">
+               <li class="nav-item">
+                  <a
+                     href="/"
+                     class="nav-link-nb"
+                     >Trang chủ</a
+                  >
+               </li>
+
+               <li class="nav-item">
+                  <a
+                     href="/rooms"
+                     class="nav-link-nb"
+                     >Khách sạn & Resort</a
+                  >
+               </li>
+               <li class="nav-item">
+                  <a
+                     href="/Flights"
+                     class="nav-link-nb nav-link-nb-main"
+                     >Vé máy bay</a
+                  >
+               </li>
+               <li class="nav-item">
+                  <a
+                     href="/hotel"
+                     class="nav-link-nb"
+                     >Thông tin</a
+                  >
+               </li>
+               <li class="nav-item">
+                  <a
+                     href="/location"
+                     class="nav-link-nb"
+                     >Vị trí</a
+                  >
+               </li>
+               <!-- <li class="nav-item">
+               <a href="/login" class="nav-link-nb">Đăng nhập</a>
+             </li>
+             <li class="nav-item">
+               <a href="/register" class="nav-link-nb">Đăng ký</a>
+             </li> -->
+            </ul>
+         </div>
+         <div class="header-account">
+            <!-- đã login -->
+            <!-- <div class="btn-account login-success">
+             <span class="username">Hello Khang</span>
+             <i class="bx bx-user-check"></i>
+             <div class="account-info hide-if">
+               <div class="arrow-up"></div>
+               <ul class="list-info">
+                 <li><a href="/cart">Giỏ hàng</a></li>
+                 <li><a href="/info">Thông tin</a></li>
+                 <li><a href="/list-room">Phòng đã đặt</a></li>
+                 <li><a href="/logout">Đăng xuất</a></li>
+               </ul>
+             </div>
+           </div> -->
+
+            <!-- Chưa login -->
+            <a
+               class="btn-login btn-account"
+               href="/login"
+               ><i class="bx bx-user"></i>Đăng nhập
+            </a>
+            <a
+               class="btn-register btn-account"
+               href="/register"
+               >Đăng ký
+            </a>
+         </div>
+      </div>
+      <div
+         style="margin-top: 100px"
+         class="container">
+         <div class="col-lg-12">
+            <div class="section-title">
+               <h5 style="font-size: 30px; margin: 10px 0">
+                  Thông tin đặt vé máy bay
+               </h5>
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-12 col-md-6 info-flight">
+               <div class="flightticket open">
+                  <div class="flightticket-header">
+                     <div class="flightticket-airport">
+                        <span class="flightticket-label">
+                           <%= data.flightDetail.airline %>, <%=
+                           data.flightDetail.departureAirport.province %> (<%=
+                           data.flightDetail.departureAirport.airport %>)</span
+                        >
+                        <span class="flightticket-airportcode"
+                           ><%= data.flightDetail.departureAirport.code %></span
+                        >
+                     </div>
+                     <div class="flightticket-icon">
+                        <i class="material-icons">flight_takeoff</i>
+                     </div>
+                     <div class="flightticket-airport">
+                        <span class="flightticket-label"
+                           ><%= data.flightDetail.arrivalAirport.province %>
+                           (<%= data.flightDetail.arrivalAirport.airport
+                           %>)</span
+                        >
+                        <span class="flightticket-airportcode"
+                           ><%= data.flightDetail.arrivalAirport.code %></span
+                        >
+                     </div>
+                  </div>
+                  <div class="flightticket-details">
+                     <div class="flightticket-content">
+                        <div class="flightticket-block">
+                           <span class="flightticket-label">Ngày đi</span>
+                           <span class="flightticket-value"
+                              ><%= data.flightDetail.departure_date %></span
+                           >
+                        </div>
+                        <div class="flightticket-block">
+                           <span class="flightticket-label">Giờ đi</span>
+                           <span class="flightticket-value"
+                              ><%= data.flightDetail.start_time %></span
+                           >
+                        </div>
+                        <div class="flightticket-block">
+                           <span class="flightticket-label">Giờ đến</span>
+                           <span class="flightticket-value"
+                              ><%= data.flightDetail.end_time %></span
+                           >
+                        </div>
+                        <div class="flightticket-block">
+                           <span class="flightticket-label">Số người lớn</span>
+                           <span class="flightticket-value">1 người</span>
+                        </div>
+                        <div class="flightticket-block">
+                           <span class="flightticket-label">Giá vé</span>
+                           <span
+                              id="price_ticket"
+                              class="flightticket-value"
+                              ><%= (parseInt(data.flightDetail.price) *
+                              1000).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                              ',').slice(0, -2) + 'đ' %></span
+                           >
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="mt-5">
+                  <h3 class="color-primary">Thông tin thanh toán</h3>
+                  <h4 class="mt-2">
+                     Người lớn: <span id="adult_price"> </span>
+                  </h4>
+                  <h4 class="mt-2">Trẻ em:<span id="children_price"></span></h4>
+                  <h4 class="mt-2">Thuế:<span>0đ</span></h4>
+                  <h4 class="mt-2">Phí xử lý:<span>0đ</span></h4>
+                  <h4 class="mt-2">Tổng cộng:<span id="total_price"></span></h4>
+               </div>
+            </div>
+            <div class="col-12 col-md-6 info-passenger">
+               <!-- số lượng -->
+               <div class="form-row row">
+                  <div class="form-group col-6">
+                     <label for="adult">Số người lớn (12+)</label>
+                     <input
+                        type="number"
+                        class="form-control"
+                        id="adult"
+                        value="1"
+                        min="1"
+                        max="3"
+                        required
+                        placeholder="Số người lớn" />
+                  </div>
+                  <div class="form-group col-6">
+                     <label for="children">Số trẻ em</label>
+                     <input
+                        type="number"
+                        class="form-control"
+                        id="children"
+                        value="0"
+                        min="0"
+                        max="3"
+                        required
+                        placeholder="Số trẻ em" />
+                  </div>
+               </div>
+
+               <!-- thông tin người đặt -->
+               <h3 class="color-primary">Thông tin người đặt</h3>
+               <h5 style="color: rgb(44, 43, 43); font-weight: normal">
+                  (Xin hãy cẩn thận - Thông tin hành khách phải trùng khớp với
+                  hộ chiếu hoặc giấy tờ tùy thân có ảnh của quý khách)
+               </h5>
+               <div class="passenger-form">
+                  <div class="form-group">
+                     <label for="fullname-booking">Họ và tên</label>
+                     <input
+                        type="text"
+                        class="form-control"
+                        id="fullname-booking"
+                        required />
+                  </div>
+                  <div class="form-group">
+                     <label for="phone-booking">Số điện thoại</label>
+                     <input
+                        type="tel"
+                        class="form-control"
+                        id="phone-booking"
+                        required />
+                  </div>
+                  <div class="form-group">
+                     <label for="email-booking">Email</label>
+                     <input
+                        type="email"
+                        class="form-control"
+                        id="email-booking"
+                        required />
+                  </div>
+               </div>
+               <!-- thông tin hành khách -->
+               <div class="form-info-passenger-adult">
+                  <h3 class="color-primary">
+                     Thông tin các hành khách người lớn
+                  </h3>
+                  <h5 style="color: rgb(44, 43, 43); font-weight: normal">
+                     (Xin hãy cẩn thận - Thông tin hành khách phải trùng khớp
+                     với hộ chiếu hoặc giấy tờ tùy thân có ảnh của quý khách)
+                  </h5>
+               </div>
+               <div class="form-info-passenger-children">
+                  <h3 class="color-primary">Thông tin các hành khách trẻ em</h3>
+                  <h5 style="color: rgb(44, 43, 43); font-weight: normal">
+                     (Xin hãy cẩn thận - Thông tin hành khách phải trùng khớp
+                     với hộ chiếu hoặc giấy tờ tùy thân có ảnh của quý khách)
+                  </h5>
+               </div>
+               <button class="btn btn-primary btn-book-flight my-4 mx-auto">
+                  Đặt vé
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="/client/js/toastr.js"></script>
+      <script src="/client/js/setheader.js"></script>
+
+      <script>
+         function showErr(msg) {
+            toastr['warning'](msg);
+         }
+         function showSuccess(msg) {
+            toastr['success'](msg);
+         }
+         function getCookie(cname) {
+            let name = cname + '=';
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+               let c = ca[i];
+               while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+               }
+               if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+               }
+            }
+            return '';
+         }
+
+         let token = getCookie('token');
+
+         //lấy thông tin của user nếu đã đăng nhập để điền vào form thông  tin  hành khách
+         $.ajax({
+            url: '/info',
+            method: 'POST',
+            data: token,
+         })
+            .then((data) => {
+               let message = data.message;
+               if (message == 'logged') {
+                  $('#fullname-booking').val(data.info.fullName);
+                  $('#phone-booking').val(data.info.phone);
+                  $('#email-booking').val(data.info.email);
+               }
+            })
+            .catch((error) => {
+               console.log('err');
+            });
+      </script>
+      <script>
+         var adultCount = 1; // Số lượng người lớn mặc định
+         var childCount = 0; // Số lượng trẻ em mặc định
+
+         // Hàm tính toán tiền dựa trên loại vé và số lượng  người lớn và trẻ em
+         calculatePrice();
+         // Hàm tạo form hành khách người lớn
+         function createAdultForm(index) {
+            var passengerForm = `
+                        <div class="passenger-form">
+               <div class="form-group">
+                  <label>Họ tên</label>
+                  <input type="text" class="form-control pass_fullname" required>
+               </div>
+               <div class="form-group">
+                  <label>Giới tính</label>
+                  <select class="form-control pass_gender" required>
+                     <option value="">Chọn giới tính</option>
+                     <option value="male">Nam</option>
+                     <option value="female">Nữ</option>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label>Ngày sinh</label>
+                  <input type="date" class="form-control pass_birthdate" required>
+               </div>
+               <div class="form-group">
+                  <label for="passport">Số hộ chiếu</label>
+                  <input type="text" class="form-control pass_passport">
+               </div>
+               <div class="form-group">
+                  <label for="idcard">Số CMND/CCCD</label>
+                  <input type="number" maxlength="11" class="form-control pass_idcard" required>
+               </div>
+            </div>
+            `;
+
+            return passengerForm;
+         }
+
+         // Hàm tạo form hành khách trẻ em
+         function createChildForm(index) {
+            var passengerForm = `
+                     <div class="passenger-form">
+            <div class="form-group">
+               <label>Họ tên</label>
+               <input type="text" class="form-control pass_fullname" required>
+            </div>
+            <div class="form-group">
+               <label>Giới tính</label>
+               <select class="form-control pass_gender" required>
+                  <option value="">Chọn giới tính</option>
+                  <option value="male">Nam</option>
+                  <option value="female">Nữ</option>
+               </select>
+            </div>
+            <div class="form-group">
+               <label>Ngày sinh</label>
+               <input type="date" class="form-control pass_birthdate" required>
+            </div>
+            <div class="form-group">
+               <label for="passport">Số hộ chiếu</label>
+               <input type="text" class="form-control pass_passport">
+            </div>
+
+         </div>
+            `;
+
+            return passengerForm;
+         }
+
+         // Hàm thêm form hành khách người lớn
+         function addAdultForms(count) {
+            for (var i = 1; i <= count; i++) {
+               var adultForm = createAdultForm(i);
+               $('.form-info-passenger-adult').append(adultForm);
+            }
+         }
+
+         // Hàm thêm form hành khách trẻ em
+         function addChildForms(count) {
+            for (var i = 1; i <= count; i++) {
+               var childForm = createChildForm(i);
+               $('.form-info-passenger-children').append(childForm);
+            }
+         }
+
+         // Thêm form hành khách người lớn mặc định
+         addAdultForms(adultCount);
+
+         // Thêm form hành khách trẻ em mặc định
+         addChildForms(childCount);
+
+         // Sự kiện thay đổi số lượng người lớn
+         $('#adult').change(function () {
+            var newAdultCount = parseInt($(this).val());
+
+            // Kiểm tra và thêm hoặc xóa form hành khách người lớn
+            if (newAdultCount > adultCount) {
+               var additionalAdults = newAdultCount - adultCount;
+               addAdultForms(additionalAdults);
+            } else if (newAdultCount < adultCount) {
+               var removedAdults = adultCount - newAdultCount;
+               $('.form-info-passenger-adult .passenger-form').each(function (
+                  index,
+                  element
+               ) {
+                  $(element).remove();
+                  removedAdults--;
+                  if (removedAdults === 0) return false;
+               });
+            }
+
+            adultCount = newAdultCount; // Cập nhật số lượng người lớn
+         });
+
+         // Sự kiện thay đổi số lượng trẻ em
+         $('#children').change(function () {
+            var newChildCount = parseInt($(this).val());
+
+            // Kiểm tra và thêm hoặc xóa form hành khách trẻ em
+            if (newChildCount > childCount) {
+               var additionalChildren = newChildCount - childCount;
+               addChildForms(additionalChildren);
+            } else if (newChildCount < childCount) {
+               var removedChildren = childCount - newChildCount;
+               $('.form-info-passenger-children .passenger-form').each(
+                  function (index, element) {
+                     $(element).remove();
+                     removedChildren--;
+                     if (removedChildren === 0) return false;
+                  }
+               );
+            }
+
+            childCount = newChildCount; // Cập nhật số lượng trẻ em
+         });
+
+         // Hàm tính toán tiền dựa trên loại vé và số lượng  người lớn và trẻ em
+         function calculatePrice() {
+            const price_ticket = $('#price_ticket').text();
+            const adultCount = $('#adult').val();
+            const childCount = $('#children').val();
+
+            // Phần trăm giảm giá theo số lượng
+            const ADULT_DISCOUNT = {
+               1: 0,
+               2: 10,
+               3: 20,
+            };
+
+            const CHILDREN_DISCOUNT = {
+               0: 0,
+               1: 10,
+               2: 20,
+            };
+            // Giá người lớn
+            const adultPrice = parseInt(price_ticket.replace(/[^0-9]/g, '')); // Loại bỏ ký tự không phải số
+            const adultDiscountPercentage = ADULT_DISCOUNT[adultCount] || 0;
+            const adultDiscount = (adultPrice * adultDiscountPercentage) / 100;
+            const finalAdultPrice = adultPrice - adultDiscount;
+            const adultTotal = adultCount * finalAdultPrice;
+            $('#adult_price').text(
+               adultCount +
+                  ' x ' +
+                  finalAdultPrice +
+                  'đ  = ' +
+                  adultTotal.toLocaleString() +
+                  'đ'
+            );
+
+            // Giá trẻ em
+            const childPrice = parseInt(price_ticket.replace(/[^0-9]/g, '')); // Loại bỏ ký tự không phải số
+            const childDiscountPercentage = CHILDREN_DISCOUNT[childCount] || 0;
+            const childDiscount = (childPrice * childDiscountPercentage) / 100;
+            const finalChildPrice = childPrice - childDiscount;
+            const childTotal = childCount * finalChildPrice;
+            $('#children_price').text(
+               childCount +
+                  ' x ' +
+                  finalChildPrice +
+                  'đ  = ' +
+                  childTotal.toLocaleString() +
+                  'đ'
+            );
+
+            // Tính tổng cộng
+            const totalPrice = adultTotal + childTotal;
+            $('#total_price').text(totalPrice.toLocaleString() + 'đ');
+         }
+
+         // tính toán lại tiền khi thay đổi số lượng người lớn
+         $('#adult').change(calculatePrice);
+
+         // tính toán lại tiền khi thay đổi số lượng trẻ em
+         $('#children').change(calculatePrice);
+
+         $('.btn-book-flight').click((e) => {
+            $('.loading').css('display', 'block');
+            const adultCount = $('#adult').val();
+            const childCount = $('#children').val();
+
+            //lấy thông tin của người đặt
+            const infoBooking = {
+               fullnameCustomer: $('#fullname-booking').val(),
+               phoneCustomer: $('#phone-booking').val(),
+               emailCustomer: $('#email-booking').val(),
+            };
+
+            //mảng này dùng để chứa thông tin của các hành khách là người lớn và trẻ em
+            var passengers = []; // Mảng chứa thông tin người lớn và trẻ em
+
+            // Lấy thông tin người lớn và thêm vào mảng passengers
+            $('.form-info-passenger-adult .passenger-form').each(function (
+               index,
+               element
+            ) {
+               var passenger = {
+                  type: 'adult',
+                  fullname: $(element).find('.pass_fullname').val(),
+                  gender: $(element).find('.pass_gender').val(),
+                  birthdate: $(element).find('.pass_birthdate').val(),
+                  passport: $(element).find('.pass_passport').val(),
+                  idcard: $(element).find('.pass_idcard').val(),
+               };
+
+               passengers.push(passenger);
+            });
+
+            // Lấy thông tin trẻ em và thêm vào mảng passengers
+            $('.form-info-passenger-children .passenger-form').each(function (
+               index,
+               element
+            ) {
+               var passenger = {
+                  type: 'child',
+                  fullname: $(element).find('.pass_fullname').val(),
+                  gender: $(element).find('.pass_gender').val(),
+                  birthdate: $(element).find('.pass_birthdate').val(),
+                  passport: $(element).find('.pass_passport').val(),
+               };
+
+               passengers.push(passenger);
+            });
+            const totalPrice = $('#total_price').text();
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Lấy mã chuyến bay và loại vé muốn đặt trên url
+            const flight_id = urlParams.get('flight_id');
+            const ticket_type = urlParams.get('ticket_type');
+
+            const bookingData = {
+               flight_id,
+               ticket_type,
+               adultCount,
+               childCount,
+               ...infoBooking,
+               passengers,
+               totalPrice,
+            };
+
+            $.ajax({
+               url: '/flights/booking',
+               type: 'POST',
+               data: bookingData,
+               success: function (response) {
+                  $('.loading').css('display', 'none');
+
+                  const { success, result, message } = response;
+                  console.log(response);
+                  window.location.href = result.url_navigation;
+               },
+               error: function (xhr, status, error) {
+                  $('.loading').css('display', 'none');
+
+                  console.error('Đặt chỗ thất bại:', xhr.responseJSON);
+
+                  const { success, result, message } = xhr.responseJSON;
+
+                  showErr(message);
+               },
+            });
+         });
+      </script>
+   </body>
+</html>

@@ -1,0 +1,148 @@
+<!-- boostrap 5 -->
+<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+   crossorigin="anonymous" />
+<script
+   src="https://kit.fontawesome.com/1ca5983c13.js"
+   crossorigin="anonymous"></script>
+<% const TICKET_TYPE_NAME = { type1: 'Phổ thông', type2: 'Phổ thông cao cấp',
+type3: 'Thương gia', type4: 'Hạng nhất', };const statusColors = { WAITING:
+'bg-primary', ACCEPT: 'bg-success', CANCEL: 'bg-danger', DONE: 'bg-info' }; %>
+
+<div class="container mt-5">
+   <h3 style="text-align: center">Chi tiết vé</h3>
+   <div class="row mt-5">
+      <div class="col-md-3">
+         <h4
+            style="color: rgb(241, 69, 69)"
+            class="card-title">
+            Mã vé:# <%= data.flight_booking_id %>
+         </h4>
+         <p><strong>Tên người đặt:</strong> <%= data.fullnameCustomer %></p>
+         <p><strong>Email:</strong> <%= data.emailCustomer %></p>
+         <p><strong>Số điện thoại:</strong> <%= data.phoneCustomer %></p>
+         <p>
+            <strong>Trạng thái:</strong>
+            <span class="badge <%= statusColors[data.status] %>"
+               ><%= data.status %></span
+            >
+         </p>
+         <p>
+            <strong>Tổng giá:</strong> <%= new Intl.NumberFormat('vi-VN', {
+            style: 'currency', currency: 'VND' }).format(data.total_price) %>
+         </p>
+         <p>
+            <strong>Ngày đặt:</strong> <%= new
+            Intl.DateTimeFormat('vi-VN').format(new Date(data.booking_date)) %>
+         </p>
+         <p>
+            <strong>Loại vé:</strong> <%= TICKET_TYPE_NAME[data.ticketType] %>
+         </p>
+         <p><strong>Số người lớn:</strong> <%= data.adultCount %></p>
+         <p><strong>Số trẻ em:</strong> <%= data.childCount %></p>
+      </div>
+      <div class="col-md-9">
+         <h4 class="card-title">Danh sách hành khách</h4>
+         <table class="table table-bordered">
+            <thead>
+               <tr>
+                  <th class="text-left">Tên hành khách</th>
+                  <th class="text-center">Loại hành khách</th>
+                  <th class="text-center">Giới tính</th>
+                  <th class="text-center">Ngày sinh</th>
+                  <th class="text-center">Passport</th>
+                  <th class="text-center">Chứng minh nhân dân</th>
+               </tr>
+            </thead>
+            <tbody>
+               <% for (let j = 0; j < data.passengerData.length; j++) { %>
+               <tr>
+                  <td class="text-left">
+                     <%= data.passengerData[j].fullname %>
+                  </td>
+                  <% if (data.passengerData[j].type_passenger == 'child') { %>
+                  <td class="text-center text-child">Trẻ em</td>
+                  <% } else { %>
+                  <td class="text-center text-adult">Người lớn</td>
+                  <% } %>
+                  <td class="text-center">
+                     <% if (data.passengerData[j].gender == 'male') { %> Nam <%
+                     } else if (data.passengerData[j].gender == 'female') { %>
+                     Nữ <% } %>
+                  </td>
+                  <td class="text-center">
+                     <%= data.passengerData[j].birthdate %>
+                  </td>
+                  <td class="text-center">
+                     <%= data.passengerData[j].passport %>
+                  </td>
+                  <td class="text-center">
+                     <%= data.passengerData[j].idcard %>
+                  </td>
+               </tr>
+               <% } %>
+            </tbody>
+         </table>
+      </div>
+
+      <div class="d-flex align-items-center">
+         <div
+            class=""
+            style="font-weight: bolder; font-size: 14px">
+            Cập nhật trạng thái
+         </div>
+         <select style="width: 150px; margin-left: 10px" id="statusSelect" class="form-control" onchange="updateStatus(this.value, '<%= data.flight_booking_id %>')">
+            <% for (let i = 0; i < status.length; i++) { %>
+              <option value="<%= status[i] %>" <%= data.status === status[i] ? 'selected' : '' %>><%= status[i] %></option>
+            <% } %>
+          </select>
+      </div>
+
+      <script>
+         async function updateStatus(selectedStatus, id) {
+            try {
+               const response = await fetch(
+                  `/admin/update-ticket?id=${id}&status=${selectedStatus}`
+               );
+               const data = await response.json();
+
+               console.log('Cập nhật thành công:', data);
+               window.location.reload();
+            } catch (error) {
+               console.log(error);
+               alert('Cập nhật thất bại');
+            }
+         }
+      </script>
+   </div>
+</div>
+
+<!-- thiết lập front end -->
+<script>
+   let listText = document.querySelectorAll(
+      '.navbar-vertical .navbar-nav>.nav-item .nav-link'
+   );
+   listText.forEach((item) => {
+      if (
+         item.classList.contains('active') &&
+         item.classList.contains('bg-gradient-primary')
+      )
+         item.classList.remove('active');
+      item.classList.remove('bg-gradient-primary');
+   });
+   document.querySelector('.booking-flight').classList.add('active');
+   document
+      .querySelector('.booking-flight')
+      .classList.add('bg-gradient-primary');
+
+   document.querySelector(
+      '.breadcrumb-item.text-sm.text-dark.active'
+   ).textContent = 'Danh sách vé đã đặt';
+   document.querySelector('.breadcrumb-item a').textContent =
+      'Danh sách đặt vé';
+   document
+      .querySelector('.breadcrumb-item a')
+      .setAttribute('href', '/admin/booking-flight');
+</script>
