@@ -17,17 +17,18 @@ class AuthenController {
             //neu co token thi verify no ra
             let deccoded = jwt.verify(token, publicKey, { algorithm: 'RS256' });
 
-            //-----------get preUrl---------
-            let preUrl = req.cookies.preUrl;
-            if (preUrl) {
-               try {
-                  let url = jwt.verify(preUrl, 'preUrl');
-                  res.redirect(url);
-               } catch (error) {
-                  return res.send('URL Failed');
-               }
-               return;
-            } else return res.redirect('/');
+            // //-----------get preUrl---------
+            // let preUrl = req.cookies.preUrl;
+            // if (preUrl) {
+            //    try {
+            //       let url = jwt.verify(preUrl, 'preUrl');
+            //       res.redirect(url);
+            //    } catch (error) {
+            //       return res.send('URL Failed');
+            //    }
+            //    return;
+            // } else return res.redirect('/');
+            return res.redirect('/');
             //-----------get preUrl---------
          } catch {
             //token da bi thay doi || het han
@@ -128,6 +129,7 @@ class AuthenController {
       if (token) {
          try {
             let deccoded = jwt.verify(token, publicKey, { algorithm: 'RS256' });
+            req.body.username = deccoded.username;
             return next();
          } catch (err) {
             console.log('token da bi thay doi');

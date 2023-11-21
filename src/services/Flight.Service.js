@@ -258,6 +258,36 @@ class FlightService {
       });
    }
 
+   CreateFlight({
+      airline,
+      departureAirportId,
+      arrivalAirportId,
+      departureDate,
+      startTime,
+      endTime,
+      price,
+   }) {
+      return new Promise(async (resolve, reject) => {
+         try {
+            // Lưu thông tin đặt chỗ vào bảng FlightBooking
+            const data = await db.Flight.create({
+               airline: AIRLINE[airline],
+               airline_logo: null,
+               departure_airport_id: departureAirportId,
+               arrival_airport_id: arrivalAirportId,
+               start_time: startTime,
+               end_time: endTime,
+               departure_date: departureDate,
+               price: price,
+            });
+
+            resolve(data);
+         } catch (error) {
+            reject(error);
+         }
+      });
+   }
+
    getBooking(id) {
       return new Promise(async (resolve, reject) => {
          try {
@@ -431,6 +461,55 @@ class FlightService {
       } catch (error) {
          throw error;
       }
+   }
+
+   adminGetFilteredFlights(
+      airline,
+      departure_airport_id,
+      arrival_airport_id,
+      departure_date
+   ) {
+      return new Promise(async (resolve, reject) => {
+         try {
+            let conditions = {};
+
+            if (airline > 0 && airline) {
+               conditions.airline = AIRLINE[airline];
+            }
+
+            if (departure_airport_id) {
+               conditions.departure_airport_id = departure_airport_id;
+            }
+
+            if (arrival_airport_id) {
+               conditions.arrival_airport_id = arrival_airport_id;
+            }
+
+            if (departure_date) {
+               conditions.departure_date = {
+                  [Op.eq]: literal(`DATE('${departure_date}')`),
+               };
+            }
+
+            let query = await db.Flight.findAll({
+               where: conditions,
+               include: [
+                  {
+                     model: db.Airport,
+                     as: 'departureAirport',
+                  },
+                  {
+                     model: db.Airport,
+                     as: 'arrivalAirport',
+                  },
+               ],
+               ...configQuery,
+            });
+            resolve(query);
+         } catch (error) {
+            reject(error);
+         }
+      });
    }
 }
 

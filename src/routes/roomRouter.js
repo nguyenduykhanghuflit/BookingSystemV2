@@ -2,26 +2,33 @@ import express from 'express';
 let router = express.Router();
 const roomController = require('../controller/roomController');
 const authController = require('../controller/authController');
+
+router.get('/comment', roomController.GetComment);
+router.post(
+   '/comment',
+   authController.CheckLogin,
+   roomController.CreateComment
+);
 router.get('/filter', roomController.FilterRooms);
 router.get('/detail/:typeID', roomController.DetailRooms);
 router.get(
-  '/booking/:typeID',
-  authController.CheckLogin,
-  roomController.Booking
+   '/booking/:typeID',
+   authController.CheckLogin,
+   roomController.Booking
 );
 
 // api kiểm tra đặt phòng
 router.post(
-  '/check-data-booking',
-  authController.CheckLogin,
-  roomController.CheckBooking,
-  roomController.CheckDataBooking
+   '/check-data-booking',
+   authController.CheckLogin,
+   roomController.CheckBooking,
+   roomController.CheckDataBooking
 );
 router.post(
-  '/booking',
-  authController.CheckLogin,
-  roomController.CheckBooking,
-  roomController.CreateBooking
+   '/booking',
+   authController.CheckLogin,
+   roomController.CheckBooking,
+   roomController.CreateBooking
 );
 
 router.get('/', roomController.Rooms);

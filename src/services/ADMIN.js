@@ -483,7 +483,8 @@ class ADMIN {
       children,
       bed,
       description,
-      view
+      view,
+      imgData
    ) {
       await db.Type.update(
          {
@@ -501,6 +502,19 @@ class ADMIN {
             },
          }
       );
+
+      for (let i = 0; i < imgData.length; i++) {
+         await db.Image.update(
+            {
+               url: imgData[i].imgUrl,
+            },
+            {
+               where: {
+                  imageID: imgData[i].imageID,
+               },
+            }
+         );
+      }
    }
 
    GetAllType() {

@@ -64,16 +64,13 @@ $(document).ready(function () {
       hideMethod: 'fadeOut',
    };
 
-   $('#date-checkin').val('2011/09/29');
-
    $('#btnSearch').click(function () {
-      let checkin = new Date($('#date-checkin').val()),
-         checkout = new Date($('#date-checkout').val()),
-         room = $('#number-room').val(),
+      let checkin = $('#date-checkin').val(),
+         checkout = $('#date-checkout').val(),
          adult = $('#number-adult').val();
       children = $('#number-children').val();
 
-      window.location.href = `/rooms/filter?adult=${adult}&children=${children}`;
+      window.location.href = `/rooms/filter?checkin=${checkin}&checkout=${checkout}&adult=${adult}&children=${children}`;
    });
 
    function CheckDateInvalid() {

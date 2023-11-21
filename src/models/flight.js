@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             primaryKey: true,
             type: DataTypes.INTEGER,
+            autoIncrement: true,
          },
          flight_code: DataTypes.STRING,
          airline: DataTypes.STRING,

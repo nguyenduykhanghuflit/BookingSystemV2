@@ -1,299 +1,598 @@
 <!-- boostrap 5 -->
 <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-  crossorigin="anonymous"
-/>
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+   crossorigin="anonymous" />
 <script
-  src="https://kit.fontawesome.com/1ca5983c13.js"
-  crossorigin="anonymous"
-></script>
+   src="https://kit.fontawesome.com/1ca5983c13.js"
+   crossorigin="anonymous"></script>
+<link
+   rel="stylesheet"
+   href="/client/css/loading.css"
+   type="text/css" />
 <!-- jquery database -->
 <link
-  rel="stylesheet"
-  href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
-/>
+   rel="stylesheet"
+   href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 <style>
-  a {
-    text-decoration: none;
-  }
-  .btn {
-    padding: 0.625rem 1.5rem;
-    background-color: #e91e63;
-  }
-  .btn:hover,
-  .btn:focus,
-  .btn:active {
-    background-color: #ec437c;
-  }
-  .befn::before {
-    display: none !important;
-  }
-  .befn::after {
-    display: none !important;
-  }
+   a {
+      text-decoration: none;
+   }
+   .btn {
+      padding: 0.625rem 1.5rem;
+      background-color: #e91e63;
+   }
+   .btn:hover,
+   .btn:focus,
+   .btn:active {
+      background-color: #ec437c;
+   }
+   .befn::before {
+      display: none !important;
+   }
+   .befn::after {
+      display: none !important;
+   }
 
-  .form-label {
-    font-weight: bold;
-  }
-  .ip-check {
-    display: '';
-  }
-  .none-ele {
-    display: none;
-  }
+   .form-label {
+      font-weight: bold;
+   }
+   .ip-check {
+      display: '';
+   }
+   .none-ele {
+      display: none;
+   }
 
-  /* Dropdown */
+   /* Dropdown */
 
-  .dropdown-cus {
-    display: inline-block;
-    position: relative;
-  }
+   .dropdown-cus {
+      display: inline-block;
+      position: relative;
+   }
 
-  .dd-button {
-    display: inline-block;
-    border-radius: 4px;
-    width: 80px;
-    text-align: center;
-    height: 30px;
-    padding: 0 20px;
-    line-height: 30px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .dd-button i {
-    color: #6b6e72;
-  }
+   .dd-button {
+      display: inline-block;
+      border-radius: 4px;
+      width: 80px;
+      text-align: center;
+      height: 30px;
+      padding: 0 20px;
+      line-height: 30px;
+      cursor: pointer;
+      white-space: nowrap;
+   }
+   .dd-button i {
+      color: #6b6e72;
+   }
 
-  .loading {
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(228, 215, 215, 0.2);
-    position: fixed;
-    z-index: 999999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-  }
-  .loader {
-    height: 5rem;
-    width: 5rem;
-    border-radius: 50%;
-    border: 3px solid rgb(220, 217, 213);
-    border-top-color: #002147;
-    box-sizing: border-box;
-    background: transparent;
-    animation: loading 1s linear infinite;
-    position: absolute;
-    top: 20%;
-  }
+   .loading {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: rgba(228, 215, 215, 0.2);
+      position: fixed;
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+   }
+   .loading.show {
+      display: flex;
+   }
+   .loader {
+      height: 5rem;
+      width: 5rem;
+      border-radius: 50%;
+      border: 3px solid rgb(220, 217, 213);
+      border-top-color: #002147;
+      box-sizing: border-box;
+      background: transparent;
+      animation: loading 1s linear infinite;
+      position: absolute;
+      top: 20%;
+   }
 
-  @keyframes loading {
-    0% {
-      transform: rotate(0deg);
-    }
-    0% {
-      transform: rotate(360deg);
-    }
-  }
+   @keyframes loading {
+      0% {
+         transform: rotate(0deg);
+      }
+      0% {
+         transform: rotate(360deg);
+      }
+   }
 
-  .dd-input {
-    display: none;
-  }
+   .dd-input {
+      display: none;
+   }
 
-  .dd-menu {
-    width: 110px;
-    position: absolute;
-    z-index: 2222222;
-    top: calc(100% + 5px);
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    list-style-type: none;
-    text-align: center;
-  }
+   .dd-menu {
+      width: 110px;
+      position: absolute;
+      z-index: 2222222;
+      top: calc(100% + 5px);
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+      list-style-type: none;
+      text-align: center;
+   }
 
-  .dd-input + .dd-menu {
-    display: none;
-  }
+   .dd-input + .dd-menu {
+      display: none;
+   }
 
-  .dd-input:checked + .dd-menu {
-    display: block;
-  }
+   .dd-input:checked + .dd-menu {
+      display: block;
+   }
 
-  .dd-menu li {
-    cursor: pointer;
-    white-space: nowrap;
-  }
+   .dd-menu li {
+      cursor: pointer;
+      white-space: nowrap;
+   }
 
-  .dd-menu li:hover {
-    background-color: #f6f6f6;
-  }
+   .dd-menu li:hover {
+      background-color: #f6f6f6;
+   }
 
-  .dd-menu li a {
-    display: block;
-    padding: 10px 0;
-  }
+   .dd-menu li a {
+      display: block;
+      padding: 10px 0;
+   }
 
-  .dd-menu li.divider {
-    padding: 0;
-    border-bottom: 1px solid #cccccc;
-  }
-  .err {
-    color: red;
-    font-size: 13px;
-  }
-  .alert-err {
-    display: none;
-  }
+   .dd-menu li.divider {
+      padding: 0;
+      border-bottom: 1px solid #cccccc;
+   }
+   .err {
+      color: red;
+      font-size: 13px;
+   }
+   .alert-err {
+      display: none;
+   }
 </style>
+<link
+   href="/admin/assets/richtext/richtext.min.css"
+   rel="stylesheet" />
+
 <h4>Chỉnh sửa thông tin phòng</h4>
 <div class="loading">
-  <div class="loader"></div>
+   <div class="loader"></div>
 </div>
 <div class="row">
-  <div style="margin: 0 auto" class="col-md-8 col-sm-8">
-    <div class="alert alert-err alert-warning" role="alert"></div>
-    <form method="POST" action="/admin/room-type-edit" class="row g-3">
-      <input
-        type="text"
-        value="<%= data.typeID %>"
-        readonly
-        style="display: none"
-        class="form-control"
-        name="typeID"
-      />
-      <div class="col-md-12">
-        <label for="nameType" class="form-label">Tên loại phòng</label>
-        <input
-          type="text"
-          value="<%= data.nameType %>"
-          required
-          class="form-control"
-          name="nameType"
-        />
-        <span class="err errU"></span>
-      </div>
-      <div class="col-md-3">
-        <label for="price" class="form-label">Giá phòng (1tr=1000)</label>
-        <input
-          type="number"
-          min="500"
-          max="2500"
-          required
-          class="form-control"
-          name="price"
-          value="<%= data.price %>"
-        />
-        <span class="err errP"></span>
-      </div>
-      <div class="col-md-3">
-        <label for="adult" class="form-label">Số người lớn</label>
-        <input
-          type="number"
-          min="1"
-          max="6"
-          required
-          class="form-control"
-          value="<%= data.adult %>"
-          name="adult"
-        />
-        <span class="err errF"></span>
-      </div>
-      <div class="col-md-3">
-        <label for="children" class="form-label">Số trẻ em</label>
-        <input
-          type="number"
-          min="0"
-          max="3"
-          required
-          class="form-control"
-          value="<%= data.children %>"
-          name="children"
-        />
-        <span class="err errF"></span>
-      </div>
-      <div class="col-md-3">
-        <label for="children" class="form-label">Loại giường</label>
-        <input
-          type="text"
-          required
-          class="form-control"
-          value="<%= data.bed %>"
-          name="bed"
-        />
-        <span class="err errF"></span>
-      </div>
+   <div
+      style="margin: 0 auto"
+      class="col-md-8 col-sm-8">
+      <div
+         class="alert alert-err alert-warning"
+         role="alert"></div>
+      <form
+         id="myForm"
+         method="POST"
+         action="/admin/room-type-edit"
+         class="row g-3">
+         <input
+            type="text"
+            value="<%= data.typeID %>"
+            readonly
+            style="display: none"
+            class="form-control"
+            name="typeID" />
+         <div class="col-md-12">
+            <label
+               for="nameType"
+               class="form-label"
+               >Tên loại phòng</label
+            >
+            <input
+               type="text"
+               value="<%= data.nameType %>"
+               required
+               class="form-control"
+               name="nameType" />
+            <span class="err errU"></span>
+         </div>
+         <div class="col-md-3">
+            <label
+               for="price"
+               class="form-label"
+               >Giá phòng (1tr=1000)</label
+            >
+            <input
+               type="number"
+               min="500"
+               max="2500"
+               required
+               class="form-control"
+               name="price"
+               value="<%= data.price %>" />
+            <span class="err errP"></span>
+         </div>
+         <div class="col-md-3">
+            <label
+               for="adult"
+               class="form-label"
+               >Số người lớn</label
+            >
+            <input
+               type="number"
+               min="1"
+               max="6"
+               required
+               class="form-control"
+               value="<%= data.adult %>"
+               name="adult" />
+            <span class="err errF"></span>
+         </div>
+         <div class="col-md-3">
+            <label
+               for="children"
+               class="form-label"
+               >Số trẻ em</label
+            >
+            <input
+               type="number"
+               min="0"
+               max="3"
+               required
+               class="form-control"
+               value="<%= data.children %>"
+               name="children" />
+            <span class="err errF"></span>
+         </div>
+         <div class="col-md-3">
+            <label
+               for="children"
+               class="form-label"
+               >Loại giường</label
+            >
+            <input
+               type="text"
+               required
+               class="form-control"
+               value="<%= data.bed %>"
+               name="bed" />
+            <span class="err errF"></span>
+         </div>
 
-      <div class="col-md-12">
-        <label for="description" class="form-label">Mô tả</label>
-        <textarea
-          rows="5"
-          class="form-control"
-          required
-          name="description"
-          class="form-label"
-        >
-  
-            <%= data.description %>
+         <div class="col-md-12">
+            <label
+               for="description"
+               class="form-label"
+               >Mô tả</label
+            >
+            <textarea
+               style="height: 800px"
+               id="description"
+               class="form-control"
+               required
+               name="description"
+               class="form-label">
+            <%= data.description.trim() %>
           </textarea
-        >
+            >
 
-        <span class="err errF"></span>
-      </div>
-      <div class="col-md-12">
-        <label for="view" class="form-label">View</label>
-        <input
-          type="text"
-          required
-          class="form-control"
-          value="<%= data.view %>"
-          name="view"
-        />
-        <span class="err errF"></span>
-      </div>
+            <span class="err errF"></span>
+         </div>
+         <div class="col-md-12">
+            <label
+               for="view"
+               class="form-label"
+               >View</label
+            >
+            <input
+               type="text"
+               required
+               class="form-control"
+               value="<%= data.view %>"
+               name="view" />
+            <span class="err errF"></span>
+         </div>
+         <% data.imgData.forEach(function(image) { %>
+         <div class="col-md-12 d-flex align-items-center">
+            <input
+               placeholder="Nhập url hình ảnh mới"
+               style="width: 40%"
+               class="form-control"
+               type="text"
+               name="imgUrl"
+               id="<%= image.imageID %>"
+               value="<%= image.url %>"
+               onchange="updateImage('<%= image.imageID %>')" />
+            <div
+               style="
+                  width: 400px;
+                  height: 300px;
+                  margin-left: 20px;
+                  border: 1px solid blue;
+                  padding: 10px;
+               ">
+               <img
+                  style="width: 100%; height: 100%"
+                  id="img-<%= image.imageID %>"
+                  src="<%= image.url %>"
+                  alt="Image" />
+            </div>
+         </div>
+         <% }); %>
 
-      <div class="col-12">
-        <button type="submit" id="btnAdd" class="btn btn-primary">
-          Cập nhật
-        </button>
-      </div>
-    </form>
-  </div>
+         <div class="col-12">
+            <button
+               type="submit"
+               id="btnAdd"
+               class="btn btn-primary">
+               Cập nhật
+            </button>
+         </div>
+      </form>
+   </div>
 </div>
 
 <!-- nhúng jquery và dataTables -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
+<script src="/admin/assets/richtext/jquery.richtext.js"></script>
+<script src="/admin/assets/richtext/jquery.richtext.min.js"></script>
 <!-- thiết lập front end -->
 <script>
-  let listText = document.querySelectorAll(
-    '.navbar-vertical .navbar-nav>.nav-item .nav-link'
-  );
-  listText.forEach((item) => {
-    if (
-      item.classList.contains('active') &&
-      item.classList.contains('bg-gradient-primary')
-    )
-      item.classList.remove('active');
-    item.classList.remove('bg-gradient-primary');
-  });
-  document.querySelector('.nav-type').classList.add('active');
-  document.querySelector('.nav-type').classList.add('bg-gradient-primary');
+   function showLoading() {
+      var loading = document.querySelector('.loading');
+      loading.classList.add('show');
+   }
 
-  document.querySelector(
-    '.breadcrumb-item.text-sm.text-dark.active'
-  ).textContent = 'Chỉnh sửa';
-  document.querySelector('.breadcrumb-item a').textContent = 'Loại phòng';
-  document
-    .querySelector('.breadcrumb-item a')
-    .setAttribute('href', '/admin/room-type');
+   function hideLoading() {
+      var loading = document.querySelector('.loading');
+      loading.classList.remove('show');
+   }
+   let listText = document.querySelectorAll(
+      '.navbar-vertical .navbar-nav>.nav-item .nav-link'
+   );
+   listText.forEach((item) => {
+      if (
+         item.classList.contains('active') &&
+         item.classList.contains('bg-gradient-primary')
+      )
+         item.classList.remove('active');
+      item.classList.remove('bg-gradient-primary');
+   });
+   document.querySelector('.nav-type').classList.add('active');
+   document.querySelector('.nav-type').classList.add('bg-gradient-primary');
+
+   document.querySelector(
+      '.breadcrumb-item.text-sm.text-dark.active'
+   ).textContent = 'Chỉnh sửa';
+   document.querySelector('.breadcrumb-item a').textContent = 'Loại phòng';
+   document
+      .querySelector('.breadcrumb-item a')
+      .setAttribute('href', '/admin/room-type');
+</script>
+
+<script>
+   function updateImage(imageID) {
+      var input = document.getElementById(imageID);
+      var imageUrl = input.value;
+      var image = document.getElementById('img-' + imageID);
+
+      image.src = imageUrl;
+   }
+</script>
+
+<script>
+   document
+      .getElementById('myForm')
+      .addEventListener('submit', function (event) {
+         event.preventDefault(); // Ngăn chặn việc gửi form đi
+         showLoading();
+         // Tạo một đối tượng FormData để lưu trữ dữ liệu form
+         var formData = new FormData(event.target);
+         var inputElements = document.getElementsByName('imgUrl');
+         var imageData = [];
+
+         for (var i = 0; i < inputElements.length; i++) {
+            var imgUrl = inputElements[i].value;
+            var imageID = inputElements[i].getAttribute('id');
+            imageData.push({ imgUrl: imgUrl, imageID: imageID });
+         }
+
+         var jsonObject = {};
+         formData.forEach(function (value, key) {
+            jsonObject[key] = value;
+         });
+         jsonObject.imageData = imageData;
+         console.log(jsonObject);
+
+         // Gửi dữ liệu đi bằng Fetch API
+         fetch('/admin/room-type-edit', {
+            method: 'POST',
+            body: JSON.stringify(jsonObject),
+            headers: {
+               'Content-Type': 'application/json',
+            },
+         })
+            .then(function (response) {
+               hideLoading();
+               // Xử lý kết quả trả về từ server
+               if (response.ok) {
+                  window.location.reload();
+               } else {
+                  alert('err');
+               }
+            })
+            .catch(function (error) {
+               hideLoading();
+               console.log(error);
+               alert('err');
+            });
+      });
+</script>
+
+<script>
+   $('#description').richText({
+      // text formatting
+      bold: true,
+      italic: true,
+      underline: true,
+
+      // text alignment
+      leftAlign: true,
+      centerAlign: true,
+      rightAlign: true,
+      justify: true,
+
+      // lists
+      ol: true,
+      ul: true,
+
+      // title
+      heading: true,
+
+      // fonts
+      fonts: true,
+      fontList: [
+         'Arial',
+         'Arial Black',
+         'Comic Sans MS',
+         'Courier New',
+         'Geneva',
+         'Georgia',
+         'Helvetica',
+         'Impact',
+         'Lucida Console',
+         'Tahoma',
+         'Times New Roman',
+         'Verdana',
+      ],
+      fontColor: true,
+      backgroundColor: true,
+      fontSize: true,
+
+      // uploads
+      imageUpload: true,
+      fileUpload: true,
+
+      // media    <a href="https://www.jqueryscript.net/tags.php?/video/">video</a>
+
+      Embed: true,
+
+      // link
+      urls: true,
+
+      // tables
+      table: true,
+
+      // code
+      removeStyles: true,
+      code: true,
+
+      // colors
+      colors: [],
+
+      // dropdowns
+      fileHTML: '',
+      imageHTML: '',
+
+      // translations
+      translations: {
+         title: 'Title',
+         white: 'White',
+         black: 'Black',
+         brown: 'Brown',
+         beige: 'Beige',
+         darkBlue: 'Dark Blue',
+         blue: 'Blue',
+         lightBlue: 'Light Blue',
+         darkRed: 'Dark Red',
+         red: 'Red',
+         darkGreen: 'Dark Green',
+         green: 'Green',
+         purple: 'Purple',
+         darkTurquois: 'Dark Turquois',
+         turquois: 'Turquois',
+         darkOrange: 'Dark Orange',
+         orange: 'Orange',
+         yellow: 'Yellow',
+         imageURL: 'Image URL',
+         fileURL: 'File URL',
+         linkText: 'Link text',
+         url: 'URL',
+         size: 'Size',
+         responsive:
+            '<a href="https://www.jqueryscript.net/tags.php?/Responsive/">Responsive</a>',
+         text: 'Text',
+         openIn: 'Open in',
+         sameTab: 'Same tab',
+         newTab: 'New tab',
+         align: 'Align',
+         left: 'Left',
+         justify: 'Justify',
+         center: 'Center',
+         right: 'Right',
+         rows: 'Rows',
+         columns: 'Columns',
+         add: 'Add',
+         pleaseEnterURL: 'Please enter an URL',
+         videoURLnotSupported: 'Video URL not supported',
+         pleaseSelectImage: 'Please select an image',
+         pleaseSelectFile: 'Please select a file',
+         bold: 'Bold',
+         italic: 'Italic',
+         underline: 'Underline',
+         alignLeft: 'Align left',
+         alignCenter: 'Align centered',
+         alignRight: 'Align right',
+         addOrderedList: 'Ordered list',
+         addUnorderedList: 'Unordered list',
+         addHeading: 'Heading/title',
+         addFont: 'Font',
+         addFontColor: 'Font color',
+         addBackgroundColor: 'Background color',
+         addFontSize: 'Font size',
+         addImage: 'Add image',
+         addVideo: 'Add video',
+         addFile: 'Add file',
+         addURL: 'Add URL',
+         addTable: 'Add table',
+         removeStyles: 'Remove styles',
+         code: 'Show HTML code',
+         undo: 'Undo',
+         redo: 'Redo',
+         save: 'Save',
+         close: 'Close',
+      },
+
+      // privacy
+      youtubeCookies: false,
+
+      // preview
+      preview: false,
+
+      // placeholder
+      placeholder: '',
+
+      // dev settings
+      useSingleQuotes: false,
+      height: 800,
+      heightPercentage: 0,
+      adaptiveHeight: false,
+      id: '',
+      class: '',
+      useParagraph: false,
+      maxlength: 0,
+      maxlengthIncludeHTML: false,
+      callback: undefined,
+      useTabForNext: false,
+      save: false,
+      saveCallback: undefined,
+      saveOnBlur: 0,
+      undoRedo: true,
+   });
 </script>

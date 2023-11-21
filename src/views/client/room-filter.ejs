@@ -69,6 +69,15 @@
          href="/client/css/toastr.css"
          type="text/css" />
    </head>
+   <style>
+      .btn-view-booking {
+         background-color: rgb(168, 155, 155) !important;
+         color: #717171;
+      }
+      .btn-view-booking:hover {
+         background-color: grey !important;
+      }
+   </style>
 
    <body>
       <div class="loading">
@@ -181,7 +190,7 @@
                                  </div>
                               </div>
                               <!-- số phòng -->
-                              <div class="col-md-2 col-sm-2">
+                              <!-- <div class="col-md-2 col-sm-2">
                                  <div class="form-group">
                                     <span class="form-label">Số phòng</span>
                                     <select
@@ -195,7 +204,7 @@
                                     </select>
                                     <span class="select-arrow"></span>
                                  </div>
-                              </div>
+                              </div> -->
                               <!-- số người lớn -->
                               <div class="col-md-2 col-sm-2">
                                  <div class="form-group">
@@ -277,9 +286,14 @@
                      </ul>
                      <h2><sup>$</sup><%= item.price%>,000đ<span>/day</span></h2>
                      <a
-                        class="btn-view-detail"
+                        class="btn-view-booking"
                         href="/rooms/booking/<%=item.typeID%>"
                         >Đặt ngay</a
+                     >
+                     <a
+                        class="btn-view-detail"
+                        href="/rooms/detail/<%=item.typeID%>?typeID=<%=item.typeID%>"
+                        >Chi tiết</a
                      >
                   </div>
                </div>
@@ -335,7 +349,16 @@
                         <li><span>View:</span><%= item.view%></li>
                      </ul>
                      <h2><sup>$</sup><%= item.price%>,000đ<span>/day</span></h2>
-                     <a href="/rooms/booking/<%=item.typeID%>">Đặt ngay</a>
+                     <a
+                        class="btn-view-booking"
+                        href="/rooms/booking/<%=item.typeID%>"
+                        >Đặt ngay</a
+                     >
+                     <a
+                        class="btn-view-detail"
+                        href="/rooms/detail/<%=item.typeID%>?typeID=<%=item.typeID%>"
+                        >Chi tiết</a
+                     >
                   </div>
                </div>
 
@@ -366,5 +389,36 @@
       <script src="/client/js/header.js"></script>
       <script src="/client/js/room.js"></script>
       <script src="/client/js/setheader.js"></script>
+
+      <script>
+         function setTodayIsDefault() {
+            let today = new Date();
+
+            formattedDate = today.toISOString().substr(0, 10);
+            document.getElementById('date-checkin').value = formattedDate;
+
+            today.setDate(today.getDate() + 1);
+            formattedDate = today.toISOString().substr(0, 10);
+            document.getElementById('date-checkout').value = formattedDate;
+         }
+         // setTodayIsDefault();
+         function setValueInputFromParam() {
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.has('checkin')) {
+               $('#date-checkin').val(urlParams.get('checkin'));
+            } else setTodayIsDefault();
+
+            if (urlParams.has('checkout')) {
+               $('#date-checkout').val(urlParams.get('checkout'));
+            } else setTodayIsDefault();
+
+            $('#number-adult').val(urlParams.get('adult') || 1);
+            $('#number-children').val(urlParams.get('children') || 0);
+         }
+
+         setValueInputFromParam();
+      </script>
    </body>
 </html>

@@ -157,7 +157,7 @@
                            </div>
                            <div class="row">
                               <!-- số phòng -->
-                              <div class="col-md-4 col-sm-4">
+                              <!-- <div class="col-md-4 col-sm-4">
                                  <div class="form-group">
                                     <span class="form-label">Số phòng</span>
                                     <select
@@ -171,9 +171,9 @@
                                     </select>
                                     <span class="select-arrow"></span>
                                  </div>
-                              </div>
+                              </div> -->
                               <!-- số người lớn -->
-                              <div class="col-md-4 col-sm-4">
+                              <div class="col-md-6 col-sm-6">
                                  <div class="form-group">
                                     <span class="form-label">Số người lớn</span>
                                     <select
@@ -188,7 +188,7 @@
                                  </div>
                               </div>
                               <!-- số trẻ em -->
-                              <div class="col-md-4 col-sm-4">
+                              <div class="col-md-6 col-sm-6">
                                  <div class="form-group">
                                     <span class="form-label">Số trẻ em</span>
                                     <select
@@ -400,5 +400,18 @@
       <script src="/client/js/toastr.js"></script>
       <script src="/client/js/header.js"></script>
       <script src="/client/js/setheader.js"></script>
+      <script>
+         function setTodayIsDefault() {
+            let today = new Date();
+
+            formattedDate = today.toISOString().substr(0, 10);
+            document.getElementById('date-checkin').value = formattedDate;
+
+            today.setDate(today.getDate() + 1);
+            formattedDate = today.toISOString().substr(0, 10);
+            document.getElementById('date-checkout').value = formattedDate;
+         }
+         setTodayIsDefault();
+      </script>
    </body>
 </html>

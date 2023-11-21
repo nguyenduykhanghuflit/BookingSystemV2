@@ -1,0 +1,598 @@
+<!-- boostrap 5 -->
+<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+   crossorigin="anonymous" />
+<script
+   src="https://kit.fontawesome.com/1ca5983c13.js"
+   crossorigin="anonymous"></script>
+<!-- jquery database -->
+<link
+   rel="stylesheet"
+   href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+<!-- toast -->
+<link
+   rel="stylesheet"
+   href="/client/css/toastr.css"
+   type="text/css" />
+<style>
+   a {
+      text-decoration: none;
+   }
+   .btn {
+      padding: 0.625rem 1.5rem;
+      background-color: #e91e63;
+   }
+   .btn:hover,
+   .btn:focus,
+   .btn:active {
+      background-color: #ec437c;
+   }
+   .befn::before {
+      display: none !important;
+   }
+   .befn::after {
+      display: none !important;
+   }
+
+   .form-label {
+      font-weight: bold;
+   }
+   .ip-check {
+      display: '';
+   }
+   .none-ele {
+      display: none;
+   }
+
+   /* Dropdown */
+
+   .dropdown-cus {
+      display: inline-block;
+      position: relative;
+   }
+
+   .dd-button {
+      display: inline-block;
+      border-radius: 4px;
+      width: 80px;
+      text-align: center;
+      height: 30px;
+      padding: 0 20px;
+      line-height: 30px;
+      cursor: pointer;
+      white-space: nowrap;
+   }
+   .dd-button i {
+      color: #6b6e72;
+   }
+
+   .dd-input {
+      display: none;
+   }
+
+   .dd-menu {
+      width: 110px;
+      position: absolute;
+      z-index: 2222222;
+      top: calc(100% + 5px);
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+      list-style-type: none;
+      text-align: center;
+   }
+
+   .dd-input + .dd-menu {
+      display: none;
+   }
+
+   .dd-input:checked + .dd-menu {
+      display: block;
+   }
+
+   .dd-menu li {
+      cursor: pointer;
+      white-space: nowrap;
+   }
+
+   .dd-menu li:hover {
+      background-color: #f6f6f6;
+   }
+
+   .dd-menu li a {
+      display: block;
+      padding: 10px 0;
+   }
+
+   .dd-menu li.divider {
+      padding: 0;
+      border-bottom: 1px solid #cccccc;
+   }
+</style>
+<% const TICKET_TYPE_NAME = { type1: 'Phổ thông', type2: 'Phổ thông cao cấp',
+type3: 'Thương gia', type4: 'Hạng nhất', }; const statusColors = { WAITING:
+'bg-primary', ACCEPT: 'bg-success', CANCEL: 'bg-danger', DONE: 'bg-info' }; %>
+
+<h4>Danh sách các chuyến bay</h4>
+<div class="row mt-3">
+   <!-- booking form -->
+   <div class="row">
+      <div class="col-md-12">
+         <div class="booking-form">
+            <form name="booking-form">
+               <div class="row">
+                  <!-- bắt đầu từ -->
+                  <div class="col-3">
+                     <div class="form-group">
+                        <span class="form-label">Thành phố đi</span>
+                        <select
+                           id="departure_airport_id"
+                           name="departure_airport_id"
+                           required
+                           class="form-control">
+                           <option value="0">
+                              Chọn 1 thành phố hoặc sân bay
+                           </option>
+                           <% airports.forEach(function(airport) { %>
+                           <option value="<%= airport.ariport_id %>">
+                              <%= airport.province %> ( <%= airport.airport %> )
+                           </option>
+                           <% }) %>
+                        </select>
+                        <span class="select-arrow"></span>
+                     </div>
+                  </div>
+                  <!-- kết thúc ở -->
+                  <div class="col-3">
+                     <div class="form-group">
+                        <span class="form-label">Thành phố đến</span>
+                        <select
+                           id="arrival_airport_id"
+                           name="arrival_airport_id"
+                           required
+                           class="form-control">
+                           <option value="0">
+                              Chọn 1 thành phố hoặc sân bay
+                           </option>
+                           <% airports.forEach(function(airport) { %>
+                           <option value="<%= airport.ariport_id %>">
+                              <%= airport.province %> ( <%= airport.airport %> )
+                           </option>
+                           <% }) %>
+                        </select>
+                        <span class="select-arrow"></span>
+                     </div>
+                  </div>
+
+                  <!-- check in -->
+                  <div class="col-3">
+                     <div class="form-group">
+                        <span class="form-label">Ngày đi</span>
+                        <input
+                           id="departure_date"
+                           name="departure_date"
+                           class="form-control sn input-not-empty"
+                           type="date"
+                           required />
+                     </div>
+                  </div>
+
+                  <!-- chọn hãng hàng không -->
+                  <div class="col-3">
+                     <div class="form-group">
+                        <span class="form-label">Hãng hàng không</span>
+                        <select
+                           id="airline"
+                           name="airline"
+                           required
+                           class="form-control">
+                           <option value="0">Tất cả</option>
+                           <option value="1">Vietnam Airline</option>
+                           <option value="2">Bamboo Airways</option>
+                           <option value="3">Vietravel Airlines</option>
+                           <option value="4">Vietjet Air</option>
+                           <option value="5">Jetstar Pacific Airlines</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                     </div>
+                  </div>
+
+                  <div class="col-6 mt-3">
+                     <button
+                        id="btnFilterFlight"
+                        type="button"
+                        class="btn btn-fliter form-group btn-primary">
+                        Tìm kiếm chuyến bay
+                     </button>
+                     <button
+                        style="background-color: blueviolet"
+                        id="btnCreateFlight"
+                        type="button"
+                        class="btn form-group btn-success">
+                        Thêm chuyến bay
+                     </button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="container">
+   <div class="row mt-3">
+      <h3>Số chuyến bay <%= length %></h3>
+      <table
+         id="mytable"
+         class="display nowrap"
+         style="width: 100%">
+         <thead>
+            <tr>
+               <th>Flight ID</th>
+               <th>Hãng bay</th>
+               <th>Đi từ</th>
+               <th>Đi đến</th>
+               <th>Thời gian đi</th>
+               <th>Thời gian đến</th>
+               <th>Ngày khởi hành</th>
+               <th>Giá</th>
+            </tr>
+         </thead>
+         <tbody id="renderData">
+            <% data.forEach(function(flight) { %>
+            <tr>
+               <td><%= flight.flight_id %></td>
+               <td><%= flight.airline %></td>
+               <td>
+                  <%= flight.departureAirport.airport %> (<%=
+                  flight.departureAirport.code %>)
+               </td>
+               <td>
+                  <%= flight.arrivalAirport.airport %> (<%=
+                  flight.arrivalAirport.code %>)
+               </td>
+               <td><%= flight.start_time %></td>
+               <td><%= flight.end_time %></td>
+               <td><%= flight.departure_date %></td>
+
+               <td>
+                  <%= new Intl.NumberFormat('vi-VN', { style: 'currency',
+                  currency: 'VND' }).format(flight.price * 1000) %>
+               </td>
+            </tr>
+            <% }); %>
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<!-- Modal -->
+<div
+   class="modal fade"
+   id="createFlightModal"
+   tabindex="-1"
+   role="dialog"
+   aria-labelledby="createFlightModalLabel"
+   aria-hidden="true">
+   <div
+      class="modal-dialog"
+      role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5
+               class="modal-title"
+               id="createFlightModalLabel">
+               Thêm chuyến bay
+            </h5>
+            <button
+               type="button"
+               class="close"
+               data-dismiss="modal"
+               aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <!-- Form để nhập thông tin chuyến bay -->
+            <form id="createFlightForm">
+               <div class="form-group">
+                  <label for="airline">Hãng hàng không</label>
+                  <select
+                     id="airline_create"
+                     name="airline_create"
+                     required
+                     class="form-control">
+                     <option value="0">Tất cả</option>
+                     <option value="1">Vietnam Airline</option>
+                     <option value="2">Bamboo Airways</option>
+                     <option value="3">Vietravel Airlines</option>
+                     <option value="4">Vietjet Air</option>
+                     <option value="5">Jetstar Pacific Airlines</option>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="departureAirport">Sân bay đi</label>
+                  <select
+                     id="departure_airport_id_create"
+                     name="departure_airport_id_create"
+                     required
+                     class="form-control">
+                     <option value="0">Chọn 1 thành phố hoặc sân bay</option>
+                     <% airports.forEach(function(airport) { %>
+                     <option value="<%= airport.ariport_id %>">
+                        <%= airport.province %> ( <%= airport.airport %> )
+                     </option>
+                     <% }) %>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="arrivalAirport">Sân bay đến</label>
+
+                  <select
+                     id="arrival_airport_id_create"
+                     name="arrival_airport_id_create"
+                     required
+                     class="form-control">
+                     <option value="0">Chọn 1 thành phố hoặc sân bay</option>
+                     <% airports.forEach(function(airport) { %>
+                     <option value="<%= airport.ariport_id %>">
+                        <%= airport.province %> ( <%= airport.airport %> )
+                     </option>
+                     <% }) %>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="departureDate">Ngày khởi hành</label>
+                  <input
+                     type="date"
+                     class="form-control"
+                     id="departureDate_create"
+                     name="departureDate_create"
+                     required />
+               </div>
+               <div class="form-group">
+                  <label for="startTime">Thời gian khởi hành</label>
+                  <input
+                     type="time"
+                     class="form-control"
+                     id="startTime"
+                     step="3600"
+                     inputmode="numeric"
+                     name="startTime"
+                     required />
+               </div>
+               <div class="form-group">
+                  <label for="endTime">Thời gian đến</label>
+                  <input
+                     type="time"
+                     class="form-control"
+                     id="endTime"
+                     step="3600"
+                     inputmode="numeric"
+                     name="endTime"
+                     required />
+               </div>
+
+               <div class="form-group">
+                  <label for="price">Giá vé</label>
+                  <input
+                     type="number"
+                     class="form-control"
+                     id="price"
+                     name="price"
+                     required />
+               </div>
+               <!-- Các trường dữ liệu khác -->
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button
+               type="button"
+               style="background-color: #f4a637; color: #ffffff"
+               class="btn btn-secondary"
+               data-dismiss="modal">
+               Đóng
+            </button>
+            <button
+               type="button"
+               class="btn btn-primary"
+               id="createFlightButton">
+               Tạo
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- nhúng jquery và dataTables -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="/client/js/toastr.js"></script>
+<!-- thiết lập ngày tháng và lọc data -->
+<script>
+   new DataTable('#mytable', {
+      scrollX: true,
+      scrollY: true,
+      ordering: false,
+      fixedColumns: {
+         left: 2,
+      },
+      paging: false,
+      scrollCollapse: true,
+   });
+</script>
+
+<script>
+   function showErr(msg) {
+      toastr['warning'](msg);
+   }
+   function showSuccess(msg) {
+      toastr['success'](msg);
+   }
+   function objectToQueryParam(object) {
+      const params = new URLSearchParams();
+      for (const key in object) {
+         params.append(key, object[key]);
+      }
+      return params.toString();
+   }
+</script>
+<script>
+   const today = new Date();
+   function setTodayIsDefault() {
+      const formattedDate = today.toISOString().substr(0, 10);
+      document.getElementById('departure_date').value = formattedDate;
+   }
+
+   function setValueInputFromParam() {
+      // Get the URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // Check if each parameter exists and set the value of the corresponding input element
+      $('#departure_airport_id').val(
+         urlParams.get('departure_airport_id') || '2'
+      );
+      $('#arrival_airport_id').val(urlParams.get('arrival_airport_id') || '1');
+      if (urlParams.has('departure_date')) {
+         $('#departure_date').val(urlParams.get('departure_date'));
+      } else setTodayIsDefault();
+      $('#airline').val(urlParams.get('airline') || '0');
+   }
+
+   setValueInputFromParam();
+
+   $('#btnFilterFlight').click((e) => {
+      var formData = $('form[name="booking-form"]').serializeArray();
+      var req = {};
+
+      for (var i = 0; i < formData.length; i++) {
+         var item = formData[i];
+         var value = isNaN(item.value) ? item.value : parseInt(item.value);
+         req[item.name] = value;
+      }
+
+      if (!req['departure_airport_id'])
+         return showErr('Vui lòng chọn thành phố đi');
+
+      if (!req['arrival_airport_id'])
+         return showErr('Vui lòng chọn thành phố muốn đến');
+
+      today.setHours(0, 0, 0, 0);
+      //   if (new Date(req['departure_date']) < today)
+      //      return showErr('Ngày đi phải tính từ hôm nay');
+
+      const queryString = objectToQueryParam(req);
+      console.log(queryString);
+      window.location.href = `?${queryString}`;
+   });
+</script>
+
+<!-- thiết lập front end -->
+<script>
+   let listText = document.querySelectorAll(
+      '.navbar-vertical .navbar-nav>.nav-item .nav-link'
+   );
+   listText.forEach((item) => {
+      if (
+         item.classList.contains('active') &&
+         item.classList.contains('bg-gradient-primary')
+      )
+         item.classList.remove('active');
+      item.classList.remove('bg-gradient-primary');
+   });
+   document.querySelector('.admin-flights').classList.add('active');
+   document
+      .querySelector('.admin-flights')
+      .classList.add('bg-gradient-primary');
+
+   document.querySelector(
+      '.breadcrumb-item.text-sm.text-dark.active'
+   ).textContent = 'Danh sách chuyến bay';
+   document.querySelector('.breadcrumb-item a').textContent = 'Các chuyến bay';
+   document
+      .querySelector('.breadcrumb-item a')
+      .setAttribute('href', '/admin/flights');
+</script>
+
+<script>
+   // Xử lý sự kiện khi bấm nút "Thêm chuyến bay"
+   document
+      .getElementById('btnCreateFlight')
+      .addEventListener('click', function () {
+         // Reset form
+         document.getElementById('createFlightForm').reset();
+         // Mở modal
+         $('#createFlightModal').modal('show');
+      });
+
+   // Xử lý sự kiện khi bấm nút "Tạo"
+   document
+      .getElementById('createFlightButton')
+      .addEventListener('click', function () {
+         // Lấy dữ liệu từ form
+         const airline = document.getElementById('airline_create').value;
+         const departureAirport = document.getElementById(
+            'departure_airport_id_create'
+         ).value;
+         const arrivalAirport = document.getElementById(
+            'arrival_airport_id_create'
+         ).value;
+
+         const startTime = $('#startTime').val();
+         const endTime = $('#endTime').val();
+         const departureDate = $('#departureDate_create').val();
+         const price = $('#price').val();
+         // Kiểm tra xem có thiếu trường dữ liệu không
+         if (
+            !airline ||
+            !departureAirport ||
+            !arrivalAirport ||
+            !startTime ||
+            !endTime ||
+            !departureDate ||
+            !price
+         ) {
+            return showErr('Vui lòng nhập đầy đủ thông tin');
+         }
+
+         // Gọi API để tạo chuyến bay
+         const flightData = {
+            airline: airline,
+            departureAirportId: departureAirport,
+            arrivalAirportId: arrivalAirport,
+            departureDate,
+            startTime,
+            endTime,
+            price,
+            // Các trường dữ liệu khác
+         };
+         console.log(flightData);
+
+         // Gửi request tới API
+         fetch('/admin/createFlight', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(flightData),
+         })
+            .then((response) => {
+               console.log(response);
+               if (response.ok) {
+                  location.reload();
+               } else {
+                  // Nếu có lỗi, hiển thị thông báo
+                  showErr('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+               }
+            })
+            .catch((error) => {
+               console.error('Error:', error);
+               showErr('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+            });
+      });
+</script>

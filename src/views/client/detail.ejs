@@ -92,21 +92,72 @@
          rel="stylesheet"
          href="/client/css/room.css"
          type="text/css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
       <style>
          #booking {
             height: 300px;
+         }
+         .card {
+            border: none;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+            border-radius: 4px;
+         }
+
+         .dots {
+            height: 4px;
+            width: 4px;
+            margin-bottom: 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+         }
+
+         .badge {
+            padding: 7px;
+            padding-right: 9px;
+            padding-left: 16px;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+         }
+
+         .user-img {
+            margin-top: 4px;
+         }
+
+         .check-icon {
+            font-size: 17px;
+            color: #c3bfbf;
+            top: 1px;
+            position: relative;
+            margin-left: 3px;
+         }
+
+         .form-check-input {
+            margin-top: 6px;
+            margin-left: -24px !important;
+            cursor: pointer;
+         }
+
+         .form-check-input:focus {
+            box-shadow: none;
+         }
+
+         .icons i {
+            margin-left: 8px;
+         }
+         .reply {
+            margin-left: 12px;
+         }
+
+         .reply small {
+            color: #b7b4b4;
          }
       </style>
    </head>
 
    <body>
-      <!-- Page Preloder -->
       <div class="loading">
          <div class="loader"></div>
       </div>
-      <div class="btn-on-top"><span class="arrow_left"></span></div>
-      <!-- Offcanvas Menu Begin -->
-
       <div id="header">
          <div class="header-nav">
             <div class="header-logo">
@@ -119,7 +170,7 @@
                <li class="nav-item">
                   <a
                      href="/"
-                     class="nav-link-nb nav-link-nb-main"
+                     class="nav-link-nb"
                      >Trang chủ</a
                   >
                </li>
@@ -127,7 +178,7 @@
                <li class="nav-item">
                   <a
                      href="/rooms"
-                     class="nav-link-nb"
+                     class="nav-link-nb nav-link-nb-main"
                      >Khách sạn & Resort</a
                   >
                </li>
@@ -210,20 +261,18 @@
                <div class="col-lg-12">
                   <div class="room__details__content">
                      <div class="room__details__title">
-                        <h2><%= data.nameType%></h2>
+                        <h2><%= data.nameType%> - <%= data.price%>,000đ</h2>
 
                         <a
                            href="/rooms/booking/<%= data.typeID%>"
                            class="primary-btn"
-                           >Booking Now</a
+                           >Đặt ngay</a
                         >
                      </div>
+
                      <div class="room__details__desc">
-                        <h4>Giá <%= data.price%>,000đ</h4>
-                     </div>
-                     <div class="room__details__desc">
-                        <h2>Description:</h2>
-                        <p><%= data.description%></p>
+                        <h2>Mô tả:</h2>
+                        <p><%- data.description%></p>
                      </div>
                   </div>
                </div>
@@ -231,163 +280,72 @@
          </div>
       </section>
 
-      <!-- Footer Section Begin -->
-      <footer
-         class="footer set-bg"
-         data-setbg="/client/img/footer-bg.jpg">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-12">
-                  <div class="logo__carousel owl-carousel">
-                     <div class="logo__carousel__item">
-                        <a href="/client#"
-                           ><img
-                              src="/client/img/logo/logo-1.png"
-                              alt=""
-                        /></a>
+      <div class="container mt-3">
+         <div
+            style="margin-bottom: 50px"
+            class="row d-flex justify-content-center">
+            <div class="col-md-12">
+               <div
+                  class="headings d-flex justify-content-between align-items-center mb-3">
+                  <h2>Tất cả bình luận(<%= commentList.length %>)</h2>
+               </div>
+               <div class="row">
+                  <div class="col-md-10">
+                     <% if (isLogin) { %>
+                     <div class="input-group mb-3 d-flex">
+                        <input
+                           style="height: 45px"
+                           type="text"
+                           class="form-control"
+                           id="content"
+                           placeholder="Nhập nội dung bình luận" />
+                        <div class="input-group-append">
+                           <button
+                              class="btn btn-primary"
+                              type="button"
+                              id="submitComment">
+                              Gửi
+                           </button>
+                        </div>
                      </div>
-                     <div class="logo__carousel__item">
-                        <a href="/client#"
-                           ><img
-                              src="/client/img/logo/logo-2.png"
-                              alt=""
-                        /></a>
-                     </div>
-                     <div class="logo__carousel__item">
-                        <a href="/client#"
-                           ><img
-                              src="/client/img/logo/logo-3.png"
-                              alt=""
-                        /></a>
-                     </div>
-                     <div class="logo__carousel__item">
-                        <a href="/client#"
-                           ><img
-                              src="/client/img/logo/logo-4.png"
-                              alt=""
-                        /></a>
-                     </div>
-                     <div class="logo__carousel__item">
-                        <a href="/client#"
-                           ><img
-                              src="/client/img/logo/logo-5.png"
-                              alt=""
-                        /></a>
-                     </div>
+                     <% } else { %>
+                     <h3 class="text-warning">Đăng nhập để bình luận.</h3>
+                     <% } %>
                   </div>
                </div>
-            </div>
-         </div>
-         <div class="container">
-            <div class="footer__content">
-               <div class="row">
-                  <div class="col-lg-3 col-md-6 col-sm-6">
-                     <div class="footer__about">
-                        <div class="footer__logo">
-                           <a href="/client#"
-                              ><img
-                                 src="/client/img/logo.png"
-                                 alt=""
-                           /></a>
-                        </div>
-                        <h4>(123) 456-78-91096</h4>
-                        <ul>
-                           <li>Ernser Vista Suite 437, NY</li>
-                           <li>Info.colorlib@gmail.com</li>
-                        </ul>
-                        <div class="footer__social">
-                           <a href="/client#"><i class="fa fa-facebook"></i></a>
-                           <a href="/client#"><i class="fa fa-twitter"></i></a>
-                           <a href="/client#"><i class="fa fa-linkedin"></i></a>
-                           <a href="/client#"
-                              ><i class="fa fa-youtube-play"></i
-                           ></a>
-                        </div>
-                     </div>
-                  </div>
+
+               <% commentList.forEach(function(comment) { %>
+               <div class="card p-3 mt-3">
                   <div
-                     class="col-lg-3 offset-lg-1 col-md-5 offset-md-1 col-sm-6">
-                     <div class="footer__widget">
-                        <h4>Quick Link</h4>
-                        <ul>
-                           <li><a href="/client#">Home</a></li>
-                           <li><a href="/client#">Booking</a></li>
-                           <li><a href="/client#">About Us</a></li>
-                           <li><a href="/client#">Review</a></li>
-                           <li><a href="/client#">Contact</a></li>
-                        </ul>
-                        <ul>
-                           <li><a href="/client#">Services</a></li>
-                           <li><a href="/client#">Our Room</a></li>
-                           <li><a href="/client#">Restaurants</a></li>
-                           <li><a href="/client#">Payments</a></li>
-                           <li><a href="/client#">Events</a></li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-lg-5 col-md-8 col-sm-12">
-                     <div class="footer__newslatter">
-                        <h4>Subscribe our newlatester</h4>
-                        <form action="#">
-                           <input
-                              type="text"
-                              placeholder="Your E-mail Address" />
-                           <button type="submit">Subscribe</button>
-                        </form>
-                        <div class="footer__newslatter__find">
-                           <h5>Find Us:</h5>
-                           <div class="footer__newslatter__find__links">
-                              <a href="/client#"
-                                 ><i class="fa fa-tripadvisor"></i
-                              ></a>
-                              <a href="/client#"><i class="fa fa-map-o"></i></a>
-                              <a href="/client#"
-                                 ><i class="fa fa-dribbble"></i
-                              ></a>
-                              <a href="/client#"
-                                 ><i class="fa fa-forumbee"></i
-                              ></a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="footer__copyright">
-               <div class="row">
-                  <div class="col-lg-7 col-md-7">
-                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                     <div class="footer__copyright__text">
-                        <p>
-                           Copyright &copy;
-                           <script>
-                              document.write(new Date().getFullYear());
-                           </script>
-                           All rights reserved | This template is made with
-                           <i
-                              class="fa fa-heart"
-                              aria-hidden="true"></i>
-                           by
-                           <a
-                              href="/clienthttps://colorlib.com"
-                              target="_blank"
-                              >Colorlib</a
+                     class="d-flex justify-content-between align-items-center">
+                     <div class="user d-flex flex-row align-items-center">
+                        <img
+                           src="https://i.imgur.com/hczKIze.jpg"
+                           width="40"
+                           class="user-img rounded-circle mr-2" />
+                        <span>
+                           <small
+                              style="font-size: 15px"
+                              class="font-weight-bold text-primary"
+                              ><%= comment.userComment.username %></small
                            >
-                        </p>
+                           <small
+                              style="font-size: 15px"
+                              class="font-weight-bold"
+                              ><%= comment.content %></small
+                           >
+                        </span>
                      </div>
-                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                  </div>
-                  <div class="col-lg-5 col-md-5">
-                     <ul class="footer__copyright__links">
-                        <li><a href="/client#">Terms Of Use</a></li>
-                        <li><a href="/client#">Privacy Policy</a></li>
-                     </ul>
+                     <small
+                        ><%= comment.createdAt.toLocaleString('vi-VN', {
+                        timeZone: 'Asia/Ho_Chi_Minh' }) %></small
+                     >
                   </div>
                </div>
+               <% }); %>
             </div>
          </div>
-      </footer>
-      <!-- Footer Section End -->
+      </div>
 
       <!-- Js Plugins -->
 
@@ -427,6 +385,51 @@
                toastr['warning']('Rất tiếc hiện tại đã hết phòng');
             });
          });
+
+         $('#submitComment').click(function () {
+            sendComment();
+         });
+
+         // Xử lý khi nhấn phím Enter trong ô input
+         $('#content').keypress(function (event) {
+            if (event.which === 13) {
+               sendComment();
+            }
+         });
+         function sendComment() {
+            var content = $('#content').val();
+            var typeID = getParameterByName('typeID');
+            var url = '/rooms/comment?typeID=' + typeID;
+
+            // Gửi request POST tới API
+            $.ajax({
+               url: url,
+               type: 'POST',
+               data: { content: content },
+               success: function (response) {
+                  // Xử lý thành công
+                  location.reload();
+               },
+               error: function () {
+                  // Xử lý lỗi
+                  alert('Có lỗi xảy ra khi gửi bình luận.');
+               },
+            });
+         }
+
+         function getParameterByName(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+               results = regex.exec(url);
+            if (!results) {
+               regex = new RegExp('/' + name + '/([^&#]*)');
+               results = regex.exec(url);
+            }
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+         }
       </script>
    </body>
 </html>

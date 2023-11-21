@@ -23,11 +23,29 @@ class RoomController {
 
    async DetailRooms(req, res) {
       let typeID = req.params.typeID;
-      //find Type by ID
+      let token = req.cookies.token;
+      let isLogin = false;
+      if (token) {
+         try {
+            let deccoded = jwt.verify(token, publicKey, { algorithm: 'RS256' });
+            isLogin = true;
+         } catch (err) {
+            isLogin = false;
+         }
+      } else {
+         isLogin = false;
+      }
+
       let data = await CRUD.getRoomTypeById(typeID);
+      const commentList = await CRUD.GetComment(typeID);
       !data
          ? res.json({ message: 'Phòng không hợp lệ' })
-         : res.render('client/detail.ejs', { data, layout: false });
+         : res.render('client/detail.ejs', {
+              data,
+              commentList,
+              isLogin,
+              layout: false,
+           });
       //   // res.render('client/detail.ejs', { data, layout: false });
    }
 
@@ -204,6 +222,19 @@ class RoomController {
          let data = await CRUD.FindRoom(adult, children);
          res.render('client/room-filter.ejs', { data, layout: false });
       }
+   }
+
+   //get comment of roomType
+   async GetComment(req, res) {
+      const { typeID } = req.query;
+      const data = await CRUD.GetComment(typeID);
+      res.send(data || []);
+   }
+   async CreateComment(req, res) {
+      const { typeID } = req.query;
+      const { content, username } = req.body;
+      const data = await CRUD.CreateComment(typeID, content, username);
+      res.send(data || {});
    }
 }
 

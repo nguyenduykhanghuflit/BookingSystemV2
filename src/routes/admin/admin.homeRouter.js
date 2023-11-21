@@ -40,7 +40,16 @@ router.get(
    AdminLoginController.CheckLogin,
    AdminFightController.GetTicketDetail
 );
-
+router.get(
+   '/flights',
+   AdminLoginController.CheckLogin,
+   AdminFightController.GetFlight
+);
+router.post(
+   '/CreateFlight',
+   AdminLoginController.CheckLogin,
+   AdminFightController.CreateFlight
+);
 router.get(
    '/update-ticket',
    AdminLoginController.CheckLogin,

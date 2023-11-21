@@ -74,6 +74,70 @@ class AdminFightController {
          return ApiErr(res, 'Server Error', error, 500);
       }
    }
+   async GetFlight(req, res) {
+      try {
+         let {
+            airline,
+            departure_airport_id,
+            arrival_airport_id,
+            departure_date,
+         } = req.query;
+
+         if (!departure_date) {
+            const today = new Date();
+            const todayString = `${today.getFullYear()}-${
+               today.getMonth() + 1
+            }-${today.getDate()}`;
+            departure_date = todayString;
+         }
+         if (!airline) airline = 0;
+         if (!departure_airport_id) departure_airport_id = 2;
+         if (!arrival_airport_id) arrival_airport_id = 1;
+
+         const data = await FlightService.adminGetFilteredFlights(
+            airline,
+            departure_airport_id,
+            arrival_airport_id,
+            departure_date
+         );
+         const airports = await FlightService.getAirports();
+
+         const response = { length: data.length, data, airports };
+         // res.send(response);
+         return res.render('admin/flights.ejs', response);
+      } catch (err) {
+         console.log(err);
+         res.send({ code: 500, msg: 'Server error' });
+      }
+   }
+
+   async CreateFlight(req, res) {
+      try {
+         const {
+            airline,
+            departureAirportId,
+            arrivalAirportId,
+            departureDate,
+            startTime,
+            endTime,
+            price,
+         } = req.body;
+
+         const data = await FlightService.CreateFlight({
+            airline,
+            departureAirportId,
+            arrivalAirportId,
+            departureDate,
+            startTime,
+            endTime,
+            price,
+         });
+         return ApiOk(res, 'Create thành công', data);
+      } catch (error) {
+         console.log(error.message);
+         return ApiErr(res, 'Server Error', error, 500);
+      }
+   }
 }
 
 module.exports = new AdminFightController();

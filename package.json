@@ -9,16 +9,8 @@
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "nodemon --exec ./node_modules/.bin/babel-node src/index.js"
    },
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/nguyenduykhangANG/quanlyhocsinh.git"
-   },
    "author": "",
    "license": "ISC",
-   "bugs": {
-      "url": "https://github.com/nguyenduykhangANG/quanlyhocsinh/issues"
-   },
-   "homepage": "https://github.com/nguyenduykhangANG/quanlyhocsinh#readme",
    "dependencies": {
       "axios": "^0.26.1",
       "babel-node": "^0.0.1-security",
@@ -41,12 +33,10 @@
       "sequelize": "^6.17.0"
    },
    "devDependencies": {
-      "@appland/appmap": "^3.111.1",
       "@babel/cli": "^7.19.3",
       "@babel/core": "^7.20.2",
       "@babel/node": "^7.20.2",
       "@babel/preset-env": "^7.20.2",
-      "@faker-js/faker": "^6.0.0",
       "babel-core": "^7.0.0-bridge.0",
       "sequelize-cli": "^6.3.0"
    },
