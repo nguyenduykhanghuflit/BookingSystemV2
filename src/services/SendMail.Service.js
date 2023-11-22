@@ -7,13 +7,13 @@ const sendMail = (to, subject, htmlContent) => {
       port: 465,
       secure: true,
       auth: {
-         user: 'nguyenduykhanghuflit@gmail.com',
-         pass: 'ntds euot pafg qrve',
+         user: 'phuchoang07092003@gmail.com', //thay mail 
+         pass: 'odxr qxml bbsz laty',
       },
    });
 
    const options = {
-      from: 'nguyenduykhanghuflit@gmail.com',
+      from: 'phuchoang07092003@gmail.com',
       to: to,
       subject: subject,
       html: htmlContent,

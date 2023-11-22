@@ -240,9 +240,10 @@ class FightController {
       try {
          const username = getUsernameFromToken(req);
 
+         console.log(username)
          const { id, tokenCancel } = req.query;
-
-         if (tokenCancel) {
+         console.log(id,tokenCancel)
+         if (tokenCancel!=null && tokenCancel && tokenCancel!="null") {
             const data = getDataTicketFromToken(tokenCancel);
             if (data) {
                //getdetail
@@ -260,9 +261,6 @@ class FightController {
                   return ApiOk(res, 'Hủy thành công', id);
                }
 
-               return ApiErr(res, 'Hủy thất bại', 'not_permission', 401);
-            } else {
-               console.log('không  có token');
                return ApiErr(res, 'Hủy thất bại', 'not_permission', 401);
             }
          }

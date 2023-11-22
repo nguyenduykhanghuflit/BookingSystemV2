@@ -8,7 +8,7 @@ const AIRLINE = {
 
 const TICKET_TYPE = {
    type1: 0,
-   type2: 500,
+   type2: 500, //cộng thêm 500
    type3: 1000,
    type4: 1500,
 };
@@ -21,8 +21,8 @@ const TICKET_TYPE_NAME = {
 
 const ADULT_PRICE = {
    1: 0,
-   2: 10,
-   3: 20,
+   2: 10, //giảm 100%
+   3: 20, //giảm 20%
 };
 
 const CHILDREN_PRICE = {

@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       {
          sequelize,
          modelName: 'Type', //chú ý
-         timestamps: false,
+         timestamps: true,
       }
    );
    return Type;

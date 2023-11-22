@@ -30,6 +30,7 @@ function emailValid(email) {
 }
 function getUsernameFromToken(req) {
    const token = req.cookies.token;
+ 
    if (!token) return null;
    const deccoded = jwt.verify(token, publicKey, { algorithm: 'RS256' });
    return deccoded?.username || null;
@@ -57,10 +58,7 @@ function mailTemplate(detail, booking = true) {
                }</td>
             </tr>
            
-             <tr>
-             <td style="font-weight: bold;">Phone:</td>
-             <td>${passenger.emailPhone}</td>
-           </tr>
+           
             <tr>
                <td style="font-weight: bold;">Giới tính:</td>
                <td>${passenger.gender == 'male' ? 'Nam' : 'Nữ'}</td>
@@ -125,7 +123,7 @@ function mailTemplate(detail, booking = true) {
    `;
 }
 function genTokenByEmailAndTicketId(email, ticketId) {
-   const secretKey = 'your_secret_key';
+   const secretKey = 'phuchoang';
    const payload = {
       email: email,
       ticketId: ticketId,
@@ -138,7 +136,7 @@ function genTokenByEmailAndTicketId(email, ticketId) {
 }
 
 function getDataTicketFromToken(token) {
-   const secretKey = 'your_secret_key';
+   const secretKey = 'phuchoang';
    try {
       const decoded = jwt.verify(token, secretKey);
       return decoded;
